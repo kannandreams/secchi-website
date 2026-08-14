@@ -1,0 +1,366 @@
+/* SECCHI.DEV — landing page.
+   Design system: black & white base, three-color functional code.
+   Each color has exactly one job and never trades jobs:
+     --pkg  #7CFFB2  Package Intelligence (and nothing else)
+     --cli  #FF4D00  CLI Analytics        (and nothing else)
+     --act  #22D3EE  interaction: links, buttons, focus (and nothing else)
+   No rounded corners anywhere. Titles: Space Grotesk. Everything else:
+   JetBrains Mono. */
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/fonts/SpaceGrotesk-700.woff2") format("woff2");
+  font-weight: 700; font-display: swap;
+}
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/fonts/SpaceGrotesk-500.woff2") format("woff2");
+  font-weight: 500; font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/JetBrainsMono-400.woff2") format("woff2");
+  font-weight: 400; font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/JetBrainsMono-500.woff2") format("woff2");
+  font-weight: 500; font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/JetBrainsMono-700.woff2") format("woff2");
+  font-weight: 700; font-display: swap;
+}
+
+:root {
+  --bg: #050505;
+  --fg: #f4f4f4;
+  --muted: #9a9a9a;
+  --line: #2a2a2a;
+  --pkg: #7CFFB2;
+  --cli: #FF4D00;
+  --act: #22D3EE;
+  --rail: 64px;          /* depth-gauge width on desktop */
+  --measure: 72rem;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; border-radius: 0 !important; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 15px;
+  line-height: 1.65;
+  padding-left: var(--rail);
+  overflow-x: hidden;
+}
+
+h1, h2 { font-family: "Space Grotesk", sans-serif; letter-spacing: -0.02em; }
+
+a { color: var(--act); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--act); outline-offset: 3px; }
+
+code { font-family: inherit; }
+
+/* Product-color roles */
+.c-pkg { color: var(--pkg); font-weight: 500; }
+.c-cli { color: var(--cli); font-weight: 500; }
+
+/* ---- Secchi-disk glyph: 2×2 quadrant, square. ---- */
+.disk-glyph {
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  width: 18px; height: 18px;
+  border: 1px solid var(--fg);
+  flex: none;
+}
+.disk-glyph i { background: var(--bg); }
+.disk-glyph i:nth-child(1), .disk-glyph i:nth-child(4) { background: var(--fg); }
+
+/* ---- Depth gauge rail (signature) ---- */
+.gauge {
+  position: fixed;
+  left: 0; top: 0; bottom: 0;
+  width: var(--rail);
+  border-right: 1px solid var(--line);
+  /* tick marks: fine every 12px, bold every 60px */
+  background:
+    repeating-linear-gradient(to bottom,
+      transparent 0, transparent 11px, var(--line) 11px, var(--line) 12px),
+    repeating-linear-gradient(to bottom,
+      transparent 0, transparent 58px, #4a4a4a 58px, #4a4a4a 60px);
+  background-size: 10px 100%, 18px 100%;
+  background-repeat: repeat-y;
+  background-position: right top, right top;
+  z-index: 10;
+}
+.gauge-disk {
+  position: absolute;
+  top: 12px;
+  left: 0; right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: top 120ms linear;
+}
+.gauge-depth {
+  font-size: 10px;
+  color: var(--muted);
+  writing-mode: vertical-rl;
+  letter-spacing: 0.08em;
+}
+
+/* ---- Nav ---- */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 32px;
+  border-bottom: 1px solid var(--line);
+}
+.wordmark {
+  display: flex; align-items: center; gap: 10px;
+  color: var(--fg);
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.14em;
+}
+.wordmark:hover { text-decoration: none; }
+.nav-links { display: flex; gap: 28px; font-size: 14px; }
+
+/* Glitch on the wordmark only, on hover only. */
+.wordmark-text { position: relative; }
+@media (prefers-reduced-motion: no-preference) {
+  .wordmark:hover .wordmark-text::before,
+  .wordmark:hover .wordmark-text::after {
+    content: attr(data-text);
+    position: absolute; left: 0; top: 0;
+    overflow: hidden;
+  }
+  .wordmark:hover .wordmark-text::before {
+    color: var(--pkg); clip-path: inset(0 0 55% 0);
+    animation: glitch-a 360ms steps(2, end) infinite;
+  }
+  .wordmark:hover .wordmark-text::after {
+    color: var(--cli); clip-path: inset(55% 0 0 0);
+    animation: glitch-b 360ms steps(2, end) infinite;
+  }
+}
+@keyframes glitch-a { 50% { transform: translate(2px, -1px); } }
+@keyframes glitch-b { 50% { transform: translate(-2px, 1px); } }
+
+/* ---- Hero ---- */
+.hero {
+  max-width: var(--measure);
+  padding: 96px 32px 88px;
+}
+.eyebrow {
+  color: var(--muted);
+  font-size: 13px;
+  max-width: 46ch;
+  margin-bottom: 40px;
+}
+.hero h1 {
+  font-weight: 700;
+  font-size: clamp(56px, 11vw, 128px);
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+.hero-sub {
+  margin-top: 36px;
+  max-width: 58ch;
+  font-size: 16px;
+}
+.hero-cta { margin-top: 40px; display: flex; gap: 16px; flex-wrap: wrap; }
+
+.btn {
+  display: inline-block;
+  padding: 14px 26px;
+  border: 1px solid var(--act);
+  color: var(--act);
+  font-size: 14px;
+  font-weight: 500;
+}
+.btn:hover { text-decoration: none; background: var(--act); color: var(--bg); }
+.btn-solid { background: var(--act); color: var(--bg); }
+.btn-solid:hover { background: transparent; color: var(--act); }
+
+/* ---- Two-product split ---- */
+.products {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--line);
+}
+.product { padding: 56px 32px 64px; }
+.product-pkg { border-right: 1px solid var(--line); border-top: 3px solid var(--pkg); }
+.product-cli { border-top: 3px solid var(--cli); }
+.product-label {
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.product h2, .section-title { font-size: 30px; font-weight: 700; margin-bottom: 18px; }
+.product p:not(.product-label) { color: var(--muted); max-width: 52ch; }
+.product p strong { color: var(--fg); }
+
+.install {
+  margin: 26px 0;
+  padding: 14px 18px;
+  border: 1px solid var(--line);
+  background: #0b0b0b;
+  font-size: 14px;
+  overflow-x: auto;
+}
+.install code::before { content: "$ "; color: var(--muted); }
+
+.shot { margin-top: 6px; }
+.shot img { width: 100%; height: auto; display: block; border: 1px solid var(--line); }
+.shot figcaption { font-size: 12px; color: var(--muted); margin-top: 10px; }
+
+/* Square-marked lists; marker color = product color. */
+.ticks { list-style: none; }
+.ticks li {
+  position: relative;
+  padding-left: 22px;
+  margin-bottom: 12px;
+  color: var(--muted);
+}
+.ticks li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0.55em;
+  width: 8px; height: 8px;
+}
+.product-cli .ticks li::before, .ticks-cli li::before { background: var(--cli); }
+.ticks-pkg li::before { background: var(--pkg); }
+.ticks li code { color: var(--fg); }
+
+/* ---- Demo terminal ---- */
+.demo {
+  border-top: 1px solid var(--line);
+  padding: 72px 32px 88px;
+  max-width: var(--measure);
+}
+.section-sub { color: var(--muted); max-width: 62ch; margin-bottom: 36px; }
+
+.tabs { display: flex; gap: 0; margin-bottom: -1px; position: relative; z-index: 1; }
+.tab {
+  font-family: inherit;
+  font-size: 13px;
+  padding: 12px 20px;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-bottom-color: transparent;
+  cursor: pointer;
+}
+.tab + .tab { margin-left: -1px; }
+.tab.is-active { color: var(--fg); background: #0b0b0b; }
+.tab-pkg.is-active { border-top: 3px solid var(--pkg); }
+.tab-cli.is-active { border-top: 3px solid var(--cli); }
+
+.terminal { border: 1px solid var(--line); background: #0b0b0b; }
+.terminal-bar {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+}
+.terminal-bar span { width: 10px; height: 10px; background: var(--line); }
+.terminal-body {
+  padding: 20px;
+  min-height: 300px;
+  font-size: 13px;
+  line-height: 1.7;
+  overflow-x: auto;
+  white-space: pre;
+}
+.terminal-body .prompt { color: var(--muted); }
+.terminal-body .cmd { font-weight: 700; }
+[data-active="pkg"] .cmd { color: var(--pkg); }
+[data-active="cli"] .cmd { color: var(--cli); }
+.terminal-body .cursor {
+  display: inline-block;
+  width: 8px; height: 15px;
+  background: var(--fg);
+  vertical-align: text-bottom;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .terminal-body .cursor { animation: blink 1s steps(1, end) infinite; }
+  .terminal-body .out { animation: reveal 160ms both; }
+}
+@keyframes blink { 50% { opacity: 0; } }
+@keyframes reveal { from { opacity: 0; } }
+
+/* ---- Capabilities ---- */
+.caps { border-top: 1px solid var(--line); padding: 72px 32px 64px; }
+.caps-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  max-width: var(--measure);
+  margin-top: 36px;
+}
+
+/* ---- Strip ---- */
+.strip {
+  border-top: 1px solid var(--line);
+  padding: 56px 32px;
+  text-align: center;
+}
+.strip p {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 500;
+  font-size: clamp(18px, 2.6vw, 26px);
+  max-width: 44ch;
+  margin: 0 auto;
+}
+
+/* ---- Footer ---- */
+.footer {
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  padding: 48px 32px 64px;
+  font-size: 13px;
+}
+.footer-col { display: flex; flex-direction: column; gap: 10px; }
+.footer-head {
+  color: var(--fg);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+.footer-note { color: var(--muted); margin-top: 10px; }
+
+/* ---- Responsive ---- */
+@media (max-width: 900px) {
+  body { padding-left: 0; }
+  .gauge { display: none; }
+  .products, .caps-grid, .footer { grid-template-columns: 1fr; }
+  .product-pkg { border-right: none; }
+  .hero { padding-top: 64px; }
+  .nav { padding: 16px 20px; }
+  .hero, .demo, .caps, .strip { padding-left: 20px; padding-right: 20px; }
+  .product { padding: 40px 20px 48px; }
+  .footer { padding: 40px 20px 56px; }
+}

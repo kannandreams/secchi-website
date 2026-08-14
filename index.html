@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Secchi — Developer Tool Intelligence</title>
+<meta name="description" content="Secchi is two instruments for developer tool intelligence: package intelligence for the dependencies you choose, CLI analytics for the tools you ship.">
+<link rel="icon" type="image/png" href="/assets/secchi-logo.png">
+<link rel="canonical" href="https://secchi.dev/">
+<meta property="og:title" content="Secchi — Developer Tool Intelligence">
+<meta property="og:description" content="Package intelligence for the dependencies you choose. CLI analytics for the tools you ship.">
+<meta property="og:url" content="https://secchi.dev/">
+<meta property="og:image" content="https://secchi.dev/assets/secchi-dashboard-preview.png">
+<link rel="stylesheet" href="/css/site.css">
+</head>
+<body>
+
+<!-- Depth gauge: the page is a descent. The disk marker sinks as you
+     scroll, the way a Secchi disk is lowered to measure visibility. -->
+<aside class="gauge" aria-hidden="true">
+  <div class="gauge-disk" id="gauge-disk">
+    <span class="disk-glyph"><i></i><i></i><i></i><i></i></span>
+    <span class="gauge-depth" id="gauge-depth">0.0 m</span>
+  </div>
+</aside>
+
+<header class="nav">
+  <a class="wordmark" href="/">
+    <span class="disk-glyph"><i></i><i></i><i></i><i></i></span>
+    <span class="wordmark-text" data-text="SECCHI">SECCHI</span>
+  </a>
+  <nav class="nav-links">
+    <a href="https://docs.secchi.dev/">Docs</a>
+    <a href="https://github.com/kannandreams/secchi">GitHub</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="hero">
+  <p class="eyebrow">A Secchi disk measures how deep you can see into water.
+  Secchi measures how deep you can see into your tools.</p>
+  <h1>Developer<br>Tool<br>Intelligence</h1>
+  <p class="hero-sub">Two instruments, one discipline:
+    <strong class="c-pkg">package intelligence</strong> for the dependencies
+    you choose, and <strong class="c-cli">CLI analytics</strong> for the
+    command-line tools you ship.</p>
+  <div class="hero-cta">
+    <a class="btn btn-solid" href="https://docs.secchi.dev/getting-started/">Read the docs</a>
+    <a class="btn" href="https://github.com/kannandreams/secchi">View on GitHub</a>
+  </div>
+</section>
+
+<section class="products" id="products">
+  <div class="product product-pkg">
+    <p class="product-label c-pkg">■ Package intelligence</p>
+    <h2>Is this dependency healthy?</h2>
+    <p>One command combines registry metadata, download activity, release
+    history, GitHub signals, dependency data, and security advisories into a
+    single health picture — across PyPI, npm, crates.io, Homebrew, Go, and
+    CRAN. In the terminal, in reports, or over MCP for coding agents.</p>
+    <pre class="install"><code>pip install secchi</code></pre>
+    <figure class="shot">
+      <img src="/assets/secchi-dashboard-preview.png"
+           alt="The Secchi terminal dashboard showing adoption, health score, and version metrics for a package" loading="lazy">
+      <figcaption>The Secchi dashboard. Real output: <code>secchi dashboard duckdb</code></figcaption>
+    </figure>
+  </div>
+  <div class="product product-cli">
+    <p class="product-label c-cli">■ CLI analytics</p>
+    <h2>How is your CLI actually used?</h2>
+    <p>A one-line shim records which commands and flags run, where they fail,
+    and whether a human or an agent was driving — locally first, into DuckDB,
+    with command paths and flag names only. Never argument values, never
+    error messages.</p>
+    <pre class="install"><code>cargo install secchi-cli-analytics</code></pre>
+    <ul class="ticks">
+      <li>Local-first: useful with zero network, zero account</li>
+      <li>Structure, not content — enforced at the schema level</li>
+      <li>Off with one switch: <code>SECCHI_ANALYTICS=0</code></li>
+      <li>Delete everything: <code>secchi analytics purge</code></li>
+    </ul>
+  </div>
+</section>
+
+<section class="demo" id="demo">
+  <h2 class="section-title">Real output, not a mockup</h2>
+  <p class="section-sub">Captured from the actual tools. The analytics data
+  is the tool measuring its own invocations — including that an agent, not a
+  human, ran them.</p>
+  <div class="tabs" role="tablist" aria-label="Product demo">
+    <button class="tab tab-pkg is-active" role="tab" aria-selected="true"
+            data-demo="pkg">secchi show duckdb</button>
+    <button class="tab tab-cli" role="tab" aria-selected="false"
+            data-demo="cli">secchi analytics stats</button>
+  </div>
+  <div class="terminal" id="terminal" data-active="pkg">
+    <div class="terminal-bar"><span></span>~/work</div>
+    <pre class="terminal-body" id="terminal-body" aria-live="polite"></pre>
+  </div>
+</section>
+
+<section class="caps" id="capabilities">
+  <h2 class="section-title">What each instrument measures</h2>
+  <div class="caps-grid">
+    <div class="caps-col">
+      <p class="product-label c-pkg">■ Package intelligence</p>
+      <ul class="ticks ticks-pkg">
+        <li>Adoption trend — 30d / 90d / 1y, period over period</li>
+        <li>Health score 0–100, graded A–F: maintenance, community,
+            documentation, releases, security, testing</li>
+        <li>Dependents and reverse-dependency growth</li>
+        <li>Version adoption across recent releases</li>
+        <li>Ecosystem distribution across registries</li>
+        <li>OSV security advisories</li>
+        <li>Health timeline from local snapshots</li>
+      </ul>
+    </div>
+    <div class="caps-col">
+      <p class="product-label c-cli">■ CLI analytics</p>
+      <ul class="ticks ticks-cli">
+        <li>Command and flag usage — names, never values</li>
+        <li>Failures by error class, per command</li>
+        <li>Durations: average and p95 per command</li>
+        <li>Version adoption of your own CLI</li>
+        <li>Usage trends over any window</li>
+        <li>Human vs. agent attribution, CI vs. interactive</li>
+        <li>Local DuckDB + Parquet store you fully own</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="strip">
+  <p><span class="c-pkg">secchi</span> tells you what to depend on.
+     <span class="c-cli">secchi-analytics</span> tells you what your users
+     depend on. Both from your terminal, both under your control.</p>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-col">
+    <p class="footer-head">Secchi</p>
+    <a href="https://docs.secchi.dev/">Documentation</a>
+    <a href="https://docs.secchi.dev/getting-started/">Getting started</a>
+    <a href="https://docs.secchi.dev/mcp/">MCP and agents</a>
+  </div>
+  <div class="footer-col">
+    <p class="footer-head">Repositories</p>
+    <a href="https://github.com/kannandreams/secchi">secchi</a>
+    <a href="https://github.com/kannandreams/secchi-cli-analytics">secchi-cli-analytics</a>
+    <a href="https://github.com/kannandreams/secchi-action">secchi-action</a>
+  </div>
+  <div class="footer-col">
+    <p class="footer-head">Project</p>
+    <a href="https://github.com/kannandreams/secchi/blob/main/LICENSE">Apache-2.0 license</a>
+    <a href="https://github.com/kannandreams/secchi/blob/main/CONTRIBUTING.md">Contributing</a>
+    <p class="footer-note">Pronounced SEK-ee, after the Secchi disk.</p>
+  </div>
+</footer>
+
+<script src="/data/demo.js"></script>
+<script src="/js/main.js"></script>
+</body>
+</html>
