@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Secchi — Developer Tool Intelligence</title>
+<title>Secchi: Developer Tool Intelligence</title>
 <meta name="description" content="Secchi is two instruments for developer tool intelligence: package intelligence for the dependencies you choose, CLI analytics for the tools you ship.">
 <link rel="icon" type="image/png" href="/assets/secchi-logo.png">
 <link rel="canonical" href="https://secchi.dev/">
-<meta property="og:title" content="Secchi — Developer Tool Intelligence">
+<meta property="og:title" content="Secchi: Developer Tool Intelligence">
 <meta property="og:description" content="Package intelligence for the dependencies you choose. CLI analytics for the tools you ship.">
 <meta property="og:url" content="https://secchi.dev/">
 <meta property="og:image" content="https://secchi.dev/assets/secchi-dashboard-preview.png">
@@ -57,7 +57,7 @@
     <h2>Is this dependency healthy?</h2>
     <p>One command combines registry metadata, download activity, release
     history, GitHub signals, dependency data, and security advisories into a
-    single health picture — across PyPI, npm, crates.io, Homebrew, Go, and
+    single health picture, across PyPI, npm, crates.io, Homebrew, Go, and
     CRAN. In the terminal, in reports, or over MCP for coding agents.</p>
     <ul class="ecosystems" aria-label="Supported package registries">
       <li><span class="ico ico-pypi" aria-hidden="true"></span>PyPI</li>
@@ -67,12 +67,16 @@
       <li><span class="ico ico-go" aria-hidden="true"></span>Go</li>
       <li><span class="ico ico-cran" aria-hidden="true"></span>CRAN</li>
     </ul>
-    <div class="install">
-      <div class="install-line">
-        <span class="prompt">$ </span><code>uvx --from secchi secchi dashboard duckdb</code>
+    <div class="cmd" data-cmd-group>
+      <div class="tabs tabs-sm" role="tablist" aria-label="Install secchi">
+        <button class="tab tab-pkg is-active" role="tab" aria-selected="true" data-cmd-tab="try">Try first</button>
+        <button class="tab tab-pkg" role="tab" aria-selected="false" data-cmd-tab="uv">uv</button>
+        <button class="tab tab-pkg" role="tab" aria-selected="false" data-cmd-tab="pip">pip</button>
       </div>
-      <div class="install-line install-alt">
-        <span class="prompt"># or, to install: </span><code>pip install secchi</code>
+      <div class="install">
+        <div class="install-line" data-cmd-panel="try"><span class="prompt">$ </span><code>uvx --from secchi secchi dashboard duckdb</code></div>
+        <div class="install-line" data-cmd-panel="uv" hidden><span class="prompt">$ </span><code>uv tool install secchi</code></div>
+        <div class="install-line" data-cmd-panel="pip" hidden><span class="prompt">$ </span><code>pip install secchi</code></div>
       </div>
     </div>
     <figure class="shot">
@@ -84,16 +88,20 @@
   <div class="product product-cli">
     <p class="product-label c-cli">■ CLI analytics</p>
     <h2>How is your CLI actually used?</h2>
-    <p>Think Google Analytics, but for a command line — and built the
-    opposite way around. One line of setup, and you'll see which commands
-    and flags people actually use, where things fail, and whether a human
-    or an AI agent was driving. It records command and flag <em>names</em>
-    only — never the values you typed, never error messages — and if a
-    captured value happens to look like a secret, an API key, a token, an
-    email, it's redacted before it's ever written to disk.</p>
-    <div class="install">
-      <div class="install-line">
-        <span class="prompt">$ </span><code>cargo install secchi-cli-analytics</code>
+    <p>Think Google Analytics, but for a command line, built the opposite
+    way around. One line of setup, and you'll see which commands and flags
+    people actually use, where things fail, and whether a human or an AI
+    agent was driving.</p>
+    <p>It only ever records command and flag <em>names</em>, never the
+    values you typed, never error messages. If a captured value happens to
+    look like a secret, an API key, a token, an email, it's redacted
+    before it's ever written to disk.</p>
+    <div class="cmd" data-cmd-group>
+      <div class="tabs tabs-sm" role="tablist" aria-label="Install secchi-cli-analytics">
+        <button class="tab tab-cli is-active" role="tab" aria-selected="true" data-cmd-tab="cargo">cargo</button>
+      </div>
+      <div class="install">
+        <div class="install-line" data-cmd-panel="cargo"><span class="prompt">$ </span><code>cargo install secchi-cli-analytics</code></div>
       </div>
     </div>
     <ul class="ticks">
@@ -108,9 +116,9 @@
 
 <section class="demo" id="demo">
   <h2 class="section-title">Real output, not a mockup</h2>
-  <p class="section-sub">Captured from the actual tools. The analytics data
-  is the tool measuring its own invocations — including that an agent, not a
-  human, ran them.</p>
+  <p class="section-sub">Captured from the actual tools, not staged
+  screenshots. The CLI Analytics tab shows the tool measuring its own
+  invocations, agent attribution included.</p>
   <div class="tabs" role="tablist" aria-label="Product demo">
     <button class="tab tab-pkg is-active" role="tab" aria-selected="true"
             data-demo="pkg">secchi show duckdb</button>
@@ -129,7 +137,7 @@
     <div class="caps-col">
       <p class="product-label c-pkg">■ Package intelligence</p>
       <ul class="ticks ticks-pkg">
-        <li>Adoption trend — 30d / 90d / 1y, period over period</li>
+        <li>Adoption trend: 30d / 90d / 1y, period over period</li>
         <li>Health score 0–100, graded A–F: maintenance, community,
             documentation, releases, security, testing</li>
         <li>Dependents and reverse-dependency growth</li>
@@ -142,7 +150,7 @@
     <div class="caps-col">
       <p class="product-label c-cli">■ CLI analytics</p>
       <ul class="ticks ticks-cli">
-        <li>Command and flag usage — names, never values</li>
+        <li>Command and flag usage: names, never values</li>
         <li>Failures by error class, per command</li>
         <li>Durations: average and p95 per command</li>
         <li>Version adoption of your own CLI</li>

@@ -141,4 +141,24 @@
   } else {
     start();
   }
+
+  /* ---- Per-product install-command tabs ("Try first" / uv / pip / cargo).
+     Each .cmd group shows exactly one command line at a time. ---- */
+  var cmdGroups = Array.prototype.slice.call(document.querySelectorAll("[data-cmd-group]"));
+  cmdGroups.forEach(function (group) {
+    var cmdTabs = Array.prototype.slice.call(group.querySelectorAll("[data-cmd-tab]"));
+    var panels = Array.prototype.slice.call(group.querySelectorAll("[data-cmd-panel]"));
+    cmdTabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        var key = tab.getAttribute("data-cmd-tab");
+        cmdTabs.forEach(function (t) {
+          t.classList.toggle("is-active", t === tab);
+          t.setAttribute("aria-selected", t === tab ? "true" : "false");
+        });
+        panels.forEach(function (panel) {
+          panel.hidden = panel.getAttribute("data-cmd-panel") !== key;
+        });
+      });
+    });
+  });
 })();

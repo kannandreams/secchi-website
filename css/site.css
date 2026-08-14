@@ -253,22 +253,29 @@ code { font-family: inherit; }
 .ico-go { mask-image: url(/assets/icons/go.svg); -webkit-mask-image: url(/assets/icons/go.svg); }
 .ico-cran { mask-image: url(/assets/icons/cran.svg); -webkit-mask-image: url(/assets/icons/cran.svg); }
 
+/* Command tabs + single-line command box. Only one command is ever
+   visible at a time (JS toggles [data-cmd-panel]), so the box always
+   stays exactly one line tall, matching the site's original tight
+   command block. */
+.cmd { margin: 26px 0; }
+.cmd .tabs { margin-bottom: -1px; }
+.cmd .install { margin: 0; }
+
 .install {
-  margin: 26px 0;
-  padding: 14px 18px;
+  padding: 12px 16px;
   border: 1px solid var(--line);
   background: #0b0b0b;
   font-size: 14px;
   overflow-x: auto;
 }
-.install-line { white-space: pre; }
-.install-line .prompt { color: var(--muted); }
-.install-line.install-alt {
-  margin-top: 8px;
-  color: var(--muted);
-  font-size: 13px;
+.install-line {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  overflow-wrap: anywhere;
 }
-.install-line.install-alt code { color: var(--fg); }
+.install-line[hidden] { display: none; }
+.install-line .prompt { color: var(--muted); flex: none; }
 
 .shot { margin-top: 6px; }
 .shot img { width: 100%; height: auto; display: block; border: 1px solid var(--line); }
@@ -322,6 +329,9 @@ code { font-family: inherit; }
 .tab.is-active { color: var(--fg); background: #0b0b0b; }
 .tab-pkg.is-active { border-top: 3px solid var(--pkg); }
 .tab-cli.is-active { border-top: 3px solid var(--cli); }
+
+/* Compact variant for the per-product install-command tabs. */
+.tabs-sm .tab { padding: 8px 14px; font-size: 12px; }
 
 .terminal { border: 1px solid var(--line); background: #0b0b0b; }
 .terminal-bar {
