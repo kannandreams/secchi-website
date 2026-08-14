@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Secchi: Developer Tool Intelligence</title>
 <meta name="description" content="Secchi is two instruments for developer tool intelligence: package intelligence for the dependencies you choose, CLI analytics for the tools you ship.">
-<link rel="icon" type="image/png" href="/assets/secchi-logo.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://secchi.dev/">
 <meta property="og:title" content="Secchi: Developer Tool Intelligence">
 <meta property="og:description" content="Package intelligence for the dependencies you choose. CLI analytics for the tools you ship.">
@@ -104,6 +104,18 @@
         <div class="install-line" data-cmd-panel="cargo"><span class="prompt">$ </span><code>cargo install secchi-cli-analytics</code></div>
       </div>
     </div>
+    <figure class="code-sample">
+      <pre><code>let analytics = Analytics::builder("myctl")
+    .cli_version(env!("CARGO_PKG_VERSION"))
+    .allow_values(["format"])
+    .start();
+
+let matches = cli::build().get_matches();
+let outcome = run(&amp;matches);
+
+analytics.record_exit(&amp;matches, exit_code, error_class);</code></pre>
+      <figcaption>Real integration code, from <code>secchi-analytics-clap</code>. Click and Cobra adapters are planned.</figcaption>
+    </figure>
     <ul class="ticks">
       <li>Local-first: useful with zero network, zero account</li>
       <li>Redaction runs even on values you explicitly allow through</li>
@@ -115,20 +127,26 @@
 </section>
 
 <section class="demo" id="demo">
-  <h2 class="section-title">Real output, not a mockup</h2>
-  <p class="section-sub">Captured from the actual tools, not staged
-  screenshots. The CLI Analytics tab shows the tool measuring its own
-  invocations, agent attribution included.</p>
+  <h2 class="section-title">In practice</h2>
+  <p class="section-sub">Pick an instrument, see what it actually prints.
+  This is real captured output, not a staged screenshot.</p>
   <div class="tabs" role="tablist" aria-label="Product demo">
     <button class="tab tab-pkg is-active" role="tab" aria-selected="true"
             data-demo="pkg">secchi show duckdb</button>
     <button class="tab tab-cli" role="tab" aria-selected="false"
-            data-demo="cli">secchi analytics stats</button>
+            data-demo="cli">secchi-analytics stats</button>
   </div>
   <div class="terminal" id="terminal" data-active="pkg">
     <div class="terminal-bar"><span></span>~/work</div>
     <pre class="terminal-body" id="terminal-body" aria-live="polite"></pre>
   </div>
+  <p class="demo-note" data-demo-note="pkg">Health, adoption, and version
+  data for one package, in one command.</p>
+  <p class="demo-note" data-demo-note="cli" hidden><code>AVG MS</code> and
+  <code>P95 MS</code> are the command's own response time in milliseconds,
+  averaged and at the 95th percentile. Lower is faster; this is
+  <code>secchi-analytics</code> timing itself, exactly as it would time
+  your CLI.</p>
 </section>
 
 <section class="caps" id="capabilities">

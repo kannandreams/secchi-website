@@ -20,7 +20,7 @@ window.SECCHI_DEMOS = {
     ],
   },
   cli: {
-    command: "secchi analytics stats --since 7d",
+    command: "secchi-analytics stats --since 7d",
     lines: [
       "9 invocation(s), 0 failure(s) in the last 7d",
       "",
@@ -31,7 +31,7 @@ window.SECCHI_DEMOS = {
       "compact                                1         9         9         0",
       "init                                   1         2         2         0",
     ],
-    command2: "secchi analytics tail -n 4",
+    command2: "secchi-analytics tail -n 4",
     lines2: [
       "2026-08-14 22:39:48  secchi-analytics.stats.completed         exit   0    14ms  agent",
       "2026-08-14 22:39:48  secchi-analytics.status.completed        exit   0     0ms  agent",

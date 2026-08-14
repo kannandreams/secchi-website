@@ -92,11 +92,16 @@
     })();
   }
 
+  var demoNotes = Array.prototype.slice.call(document.querySelectorAll("[data-demo-note]"));
+
   function play(key) {
     var demo = demos[key];
     if (!demo || !body) return;
     terminal.setAttribute("data-active", key);
     body.innerHTML = "";
+    demoNotes.forEach(function (note) {
+      note.hidden = note.getAttribute("data-demo-note") !== key;
+    });
     if (reducedMotion) {
       renderStatic(demo);
       return;
