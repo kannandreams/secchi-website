@@ -283,17 +283,23 @@ code { font-family: inherit; }
 .shot figcaption { font-size: 12px; color: var(--muted); margin-top: 10px; }
 
 /* Real integration code, positioned the same way .shot positions the
-   dashboard screenshot: the "here's the product" beat for CLI analytics. */
-.code-sample { margin-top: 22px; }
-.code-sample pre {
-  background: #0b0b0b;
-  border: 1px solid var(--line);
+   dashboard screenshot: the "here's the product" beat for CLI analytics.
+   Shares the .cmd/.tabs-sm pattern the install commands use, so tabbed
+   code reads as unmistakably a code block, not flowing text. */
+.code-block {
+  margin: 0;
   padding: 16px 18px;
+  border: 1px solid var(--line);
+  background: #0b0b0b;
   font-size: 12.5px;
   line-height: 1.65;
   overflow-x: auto;
+  white-space: pre;
 }
-.code-sample figcaption { font-size: 12px; color: var(--muted); margin-top: 10px; }
+.code-block code[hidden] { display: none; }
+.code-caption { font-size: 12px; color: var(--muted); margin-top: 10px; }
+.code-caption[hidden] { display: none; }
+.code-caption code { color: var(--fg); }
 
 /* Square-marked lists; marker color = product color. */
 .ticks { list-style: none; }

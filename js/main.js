@@ -147,12 +147,14 @@
     start();
   }
 
-  /* ---- Per-product install-command tabs ("Try first" / uv / pip / cargo).
-     Each .cmd group shows exactly one command line at a time. ---- */
+  /* ---- Per-product tabbed groups: install commands ("Try first" / uv /
+     pip / cargo) and the CLI analytics integration code (clap / click).
+     Each group shows exactly one panel and one caption at a time. ---- */
   var cmdGroups = Array.prototype.slice.call(document.querySelectorAll("[data-cmd-group]"));
   cmdGroups.forEach(function (group) {
     var cmdTabs = Array.prototype.slice.call(group.querySelectorAll("[data-cmd-tab]"));
     var panels = Array.prototype.slice.call(group.querySelectorAll("[data-cmd-panel]"));
+    var captions = Array.prototype.slice.call(group.querySelectorAll("[data-cmd-caption]"));
     cmdTabs.forEach(function (tab) {
       tab.addEventListener("click", function () {
         var key = tab.getAttribute("data-cmd-tab");
@@ -162,6 +164,9 @@
         });
         panels.forEach(function (panel) {
           panel.hidden = panel.getAttribute("data-cmd-panel") !== key;
+        });
+        captions.forEach(function (caption) {
+          caption.hidden = caption.getAttribute("data-cmd-caption") !== key;
         });
       });
     });

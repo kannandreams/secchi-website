@@ -104,8 +104,12 @@
         <div class="install-line" data-cmd-panel="cargo"><span class="prompt">$ </span><code>cargo install secchi-cli-analytics</code></div>
       </div>
     </div>
-    <figure class="code-sample">
-      <pre><code>let analytics = Analytics::builder("myctl")
+    <div class="cmd" data-cmd-group>
+      <div class="tabs tabs-sm" role="tablist" aria-label="Integration example">
+        <button class="tab tab-cli is-active" role="tab" aria-selected="true" data-cmd-tab="clap">clap, Rust</button>
+        <button class="tab tab-cli" role="tab" aria-selected="false" data-cmd-tab="click">click, Python</button>
+      </div>
+      <pre class="code-block"><code data-cmd-panel="clap">let analytics = Analytics::builder("myctl")
     .cli_version(env!("CARGO_PKG_VERSION"))
     .allow_values(["format"])
     .start();
@@ -113,9 +117,17 @@
 let matches = cli::build().get_matches();
 let outcome = run(&amp;matches);
 
-analytics.record_exit(&amp;matches, exit_code, error_class);</code></pre>
-      <figcaption>Real integration code, from <code>secchi-analytics-clap</code>. Click and Cobra adapters are planned.</figcaption>
-    </figure>
+analytics.record_exit(&amp;matches, exit_code, error_class);</code><code data-cmd-panel="click" hidden>import click
+from secchi_analytics.click import instrument
+
+@click.group()
+def cli():
+    ...
+
+instrument(cli, app_name="myctl")</code></pre>
+      <p class="code-caption" data-cmd-caption="clap">Real integration code, from <code>secchi-analytics-clap</code>. Shipped today.</p>
+      <p class="code-caption" data-cmd-caption="click" hidden>The planned Click adapter's API. Not shipped yet.</p>
+    </div>
     <ul class="ticks">
       <li>Local-first: useful with zero network, zero account</li>
       <li>Redaction runs even on values you explicitly allow through</li>
