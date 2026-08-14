@@ -84,10 +84,13 @@
   <div class="product product-cli">
     <p class="product-label c-cli">■ CLI analytics</p>
     <h2>How is your CLI actually used?</h2>
-    <p>A one-line shim records which commands and flags run, where they fail,
-    and whether a human or an agent was driving — locally first, into DuckDB,
-    with command paths and flag names only. Never argument values, never
-    error messages.</p>
+    <p>Think Google Analytics, but for a command line — and built the
+    opposite way around. One line of setup, and you'll see which commands
+    and flags people actually use, where things fail, and whether a human
+    or an AI agent was driving. It records command and flag <em>names</em>
+    only — never the values you typed, never error messages — and if a
+    captured value happens to look like a secret, an API key, a token, an
+    email, it's redacted before it's ever written to disk.</p>
     <div class="install">
       <div class="install-line">
         <span class="prompt">$ </span><code>cargo install secchi-cli-analytics</code>
@@ -95,10 +98,11 @@
     </div>
     <ul class="ticks">
       <li>Local-first: useful with zero network, zero account</li>
-      <li>Structure, not content — enforced at the schema level</li>
+      <li>Redaction runs even on values you explicitly allow through</li>
       <li>Off with one switch: <code>SECCHI_ANALYTICS=0</code></li>
       <li>Delete everything: <code>secchi analytics purge</code></li>
     </ul>
+    <p class="roadmap-note">A local TUI dashboard for this data ships next.</p>
   </div>
 </section>
 

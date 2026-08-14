@@ -292,6 +292,13 @@ code { font-family: inherit; }
 .ticks-pkg li::before { background: var(--pkg); }
 .ticks li code { color: var(--fg); }
 
+.roadmap-note {
+  margin-top: 24px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.roadmap-note::before { content: "\2192  "; color: var(--cli); }
+
 /* ---- Demo terminal ---- */
 .demo {
   border-top: 1px solid var(--line);
