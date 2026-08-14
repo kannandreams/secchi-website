@@ -59,7 +59,22 @@
     history, GitHub signals, dependency data, and security advisories into a
     single health picture — across PyPI, npm, crates.io, Homebrew, Go, and
     CRAN. In the terminal, in reports, or over MCP for coding agents.</p>
-    <pre class="install"><code>pip install secchi</code></pre>
+    <ul class="ecosystems" aria-label="Supported package registries">
+      <li><span class="ico ico-pypi" aria-hidden="true"></span>PyPI</li>
+      <li><span class="ico ico-npm" aria-hidden="true"></span>npm</li>
+      <li><span class="ico ico-crates" aria-hidden="true"></span>crates.io</li>
+      <li><span class="ico ico-homebrew" aria-hidden="true"></span>Homebrew</li>
+      <li><span class="ico ico-go" aria-hidden="true"></span>Go</li>
+      <li><span class="ico ico-cran" aria-hidden="true"></span>CRAN</li>
+    </ul>
+    <div class="install">
+      <div class="install-line">
+        <span class="prompt">$ </span><code>uvx --from secchi secchi dashboard duckdb</code>
+      </div>
+      <div class="install-line install-alt">
+        <span class="prompt"># or, to install: </span><code>pip install secchi</code>
+      </div>
+    </div>
     <figure class="shot">
       <img src="/assets/secchi-dashboard-preview.png"
            alt="The Secchi terminal dashboard showing adoption, health score, and version metrics for a package" loading="lazy">
@@ -73,7 +88,11 @@
     and whether a human or an agent was driving — locally first, into DuckDB,
     with command paths and flag names only. Never argument values, never
     error messages.</p>
-    <pre class="install"><code>cargo install secchi-cli-analytics</code></pre>
+    <div class="install">
+      <div class="install-line">
+        <span class="prompt">$ </span><code>cargo install secchi-cli-analytics</code>
+      </div>
+    </div>
     <ul class="ticks">
       <li>Local-first: useful with zero network, zero account</li>
       <li>Structure, not content — enforced at the schema level</li>

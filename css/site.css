@@ -218,6 +218,41 @@ code { font-family: inherit; }
 .product p:not(.product-label) { color: var(--muted); max-width: 52ch; }
 .product p strong { color: var(--fg); }
 
+/* Icon strip: real registry marks, monochrome via mask so a single-color
+   SVG can be recolored with a plain background-color. Muted by default,
+   brightens to the surrounding product color on hover. */
+.ecosystems {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  list-style: none;
+  margin: 24px 0 28px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.ecosystems li { display: flex; align-items: center; gap: 8px; }
+.ico {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  flex: none;
+  background-color: var(--muted);
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+}
+.ecosystems li:hover { color: var(--fg); }
+.product-pkg .ecosystems li:hover .ico { background-color: var(--pkg); }
+.ico-pypi { mask-image: url(/assets/icons/pypi.svg); -webkit-mask-image: url(/assets/icons/pypi.svg); }
+.ico-npm { mask-image: url(/assets/icons/npm.svg); -webkit-mask-image: url(/assets/icons/npm.svg); }
+.ico-crates { mask-image: url(/assets/icons/crates.svg); -webkit-mask-image: url(/assets/icons/crates.svg); }
+.ico-homebrew { mask-image: url(/assets/icons/homebrew.svg); -webkit-mask-image: url(/assets/icons/homebrew.svg); }
+.ico-go { mask-image: url(/assets/icons/go.svg); -webkit-mask-image: url(/assets/icons/go.svg); }
+.ico-cran { mask-image: url(/assets/icons/cran.svg); -webkit-mask-image: url(/assets/icons/cran.svg); }
+
 .install {
   margin: 26px 0;
   padding: 14px 18px;
@@ -226,7 +261,14 @@ code { font-family: inherit; }
   font-size: 14px;
   overflow-x: auto;
 }
-.install code::before { content: "$ "; color: var(--muted); }
+.install-line { white-space: pre; }
+.install-line .prompt { color: var(--muted); }
+.install-line.install-alt {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.install-line.install-alt code { color: var(--fg); }
 
 .shot { margin-top: 6px; }
 .shot img { width: 100%; height: auto; display: block; border: 1px solid var(--line); }
