@@ -169,7 +169,6 @@ ul { list-style: none; }
   letter-spacing: 0.14em;
 }
 .wordmark:hover { text-decoration: none; }
-.wordmark-mark { height: 26px; width: auto; flex: none; }
 .nav-links { display: flex; align-items: center; gap: 28px; font-size: 14px; }
 
 /* Solutions dropdown. Click to open (keyboard and touch), hover to open
