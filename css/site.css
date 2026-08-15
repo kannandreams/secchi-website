@@ -617,7 +617,33 @@ ul { list-style: none; }
 .tab-pkg.is-active { border-top: 3px solid var(--pkg); }
 .tab-cli.is-active { border-top: 3px solid var(--cli); }
 
-.tab-note { font-size: 10px; color: var(--muted); margin-left: 6px; text-transform: uppercase; letter-spacing: 0.08em; }
+/* Code window: a single bar with three square "window dots" and the
+   language tabs, above the code. Replaces a second stacked tab strip. */
+.codewin { margin: 20px 0 26px; border: 1px solid var(--line); background: var(--panel); }
+.codewin-bar {
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+  padding: 0 14px;
+  border-bottom: 1px solid var(--line);
+}
+.codewin-dots { display: flex; align-items: center; gap: 6px; }
+.codewin-dots i { display: block; width: 9px; height: 9px; background: var(--line); }
+.wtabs { display: flex; gap: 4px; }
+.wtab {
+  font-family: inherit;
+  font-size: 12px;
+  padding: 10px 10px 8px;
+  background: transparent;
+  color: var(--muted);
+  border: 0;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+}
+.wtab.is-active { color: var(--fg); }
+.wtab-cli.is-active { border-bottom-color: var(--cli); }
+.wtab-note { font-size: 10px; color: var(--muted); margin-left: 6px; letter-spacing: 0.06em; }
+.codewin-body { border: 0; background: transparent; }
 
 /* Compact variant for the per-product install-command tabs. */
 .tabs-sm .tab { padding: 8px 14px; font-size: 12px; }

@@ -249,20 +249,22 @@
       values you typed, never error messages. Anything that looks like a
       secret, an API key, a token, an email, is redacted before it's ever
       written to disk.</p>
-      <div class="cmd" data-cmd-group>
-        <div class="tabs tabs-sm" role="tablist" aria-label="Install secchi-cli-analytics">
-          <button class="tab tab-cli is-active" role="tab" aria-selected="true" data-cmd-tab="cargo">cargo</button>
-        </div>
+      <div class="cmd">
         <div class="install">
-          <div class="install-line" data-cmd-panel="cargo"><span class="prompt">$ </span><code>cargo install secchi-cli-analytics</code></div>
+          <div class="install-line"><span class="prompt">$ </span><code>cargo install secchi-cli-analytics</code></div>
         </div>
       </div>
-      <div class="cmd" data-cmd-group>
-        <div class="tabs tabs-sm" role="tablist" aria-label="Integration example">
-          <button class="tab tab-cli is-active" role="tab" aria-selected="true" data-cmd-tab="clap">clap, Rust</button>
-          <button class="tab tab-cli" role="tab" aria-selected="false" data-cmd-tab="click">click, Python <span class="tab-note">planned</span></button>
+      <!-- Code sample as a window: one bar carries the window dots and the
+           language tabs, so the column doesn't stack two tab strips. -->
+      <div class="codewin" data-cmd-group>
+        <div class="codewin-bar">
+          <span class="codewin-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <div class="wtabs" role="tablist" aria-label="Integration example">
+            <button class="wtab wtab-cli is-active" role="tab" aria-selected="true" data-cmd-tab="clap">main.rs <span class="wtab-note">clap</span></button>
+            <button class="wtab wtab-cli" role="tab" aria-selected="false" data-cmd-tab="click">cli.py <span class="wtab-note">click · planned</span></button>
+          </div>
         </div>
-        <pre class="code-block"><code data-cmd-panel="clap"><span class="tok-k">let</span> analytics = <span class="tok-t">Analytics</span>::<span class="tok-f">builder</span>(<span class="tok-s">"myctl"</span>)
+        <pre class="code-block codewin-body"><code data-cmd-panel="clap"><span class="tok-k">let</span> analytics = <span class="tok-t">Analytics</span>::<span class="tok-f">builder</span>(<span class="tok-s">"myctl"</span>)
     .<span class="tok-f">cli_version</span>(<span class="tok-f">env!</span>(<span class="tok-s">"CARGO_PKG_VERSION"</span>))
     .<span class="tok-f">allow_values</span>([<span class="tok-s">"format"</span>])
     .<span class="tok-f">start</span>();
