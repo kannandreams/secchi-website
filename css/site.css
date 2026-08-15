@@ -209,7 +209,7 @@ code { font-family: inherit; }
   grid-template-columns: 1fr 1fr;
   border-top: 1px solid var(--line);
 }
-.product { padding: 56px 32px 64px; }
+.product { padding: 56px 32px 64px; background: var(--bg); }
 .product-pkg { border-right: 1px solid var(--line); border-top: 3px solid var(--pkg); }
 .product-cli { border-top: 3px solid var(--cli); }
 .product-label {
