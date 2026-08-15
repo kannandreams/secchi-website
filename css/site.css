@@ -171,16 +171,18 @@ code { font-family: inherit; }
   max-width: var(--measure);
   padding: 96px 32px 88px;
 }
+/* No text-transform: the headline is written in caps directly so that
+   "CLIs." keeps its lowercase plural s. */
 .hero h1 {
   font-weight: 700;
-  font-size: clamp(56px, 11vw, 128px);
-  line-height: 0.92;
-  text-transform: uppercase;
+  font-size: clamp(48px, 9.5vw, 112px);
+  line-height: 0.98;
 }
 .hero-sub {
   margin-top: 36px;
-  max-width: 58ch;
+  max-width: 80ch;
   font-size: 16px;
+  color: var(--muted);
 }
 .hero-cta { margin-top: 40px; display: flex; gap: 16px; flex-wrap: wrap; }
 
@@ -207,17 +209,25 @@ code { font-family: inherit; }
    row (text column + visual column) rather than a side-by-side card, so
    three products don't cramp into narrow columns. */
 .instruments { border-top: 1px solid var(--line); }
+/* Section divider: a muted repeating wave (water surface, per the Secchi
+   name) instead of a bold product-color bar. Product color identity
+   stays in the labels, tabs, and tick markers within each row. */
 .instrument {
+  position: relative;
   display: grid;
   grid-template-columns: 0.95fr 1.05fr;
   gap: 48px;
-  padding: 56px 32px;
+  padding: 64px 32px 56px;
   border-bottom: 1px solid var(--line);
   background: var(--bg);
 }
-.instrument-pkg { border-top: 3px solid var(--pkg); }
-.instrument-cli { border-top: 3px solid var(--cli); }
-.instrument-cap { border-top: 3px dashed var(--cap); }
+.instrument::before {
+  content: "";
+  position: absolute;
+  top: 14px; left: 32px; right: 32px;
+  height: 8px;
+  background: url(/assets/wave.svg) repeat-x left center;
+}
 .instrument-text { max-width: 62ch; }
 .instrument-text .btn { margin-top: 8px; }
 .instrument-visual {
