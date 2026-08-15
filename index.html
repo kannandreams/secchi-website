@@ -108,34 +108,80 @@
       </div>
     </div>
     <div class="flow-sink-wrap">
-      <div class="flow-sink-row">
-        <span class="flow-link" aria-hidden="true"><i></i><b>&#9654;</b></span>
-        <div class="flow-sink">
-          <span class="disk-glyph" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-          <span class="flow-sink-name">SECCHI</span>
-        </div>
+      <span class="flow-link" aria-hidden="true"><i></i><b>&#9654;</b></span>
+      <div class="flow-sink">
+        <span class="disk-glyph" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span class="flow-sink-name">SECCHI</span>
       </div>
-      <span class="flow-drop" aria-hidden="true"><i></i><b>&#9660;</b></span>
-      <!-- Illustrative traces, not captured data: one signal per family,
-           in that family's colour, labelled so identity is never colour-alone. -->
+      <span class="flow-link" aria-hidden="true"><i></i><b>&#9654;</b></span>
+    </div>
+    <!-- Illustrative charts, not captured data: one per family, in that
+         family's colour, directly labelled so identity is never colour-alone. -->
       <div class="signal-panel">
-        <svg class="signals" viewBox="0 0 300 208" role="img" aria-label="Illustrative signal traces for the three families">
+        <svg class="signals" viewBox="0 0 300 286" role="img" aria-label="Illustrative charts: ecosystem health breakdown, CLI invocations against p95 latency, and drift in agent context retrieval">
           <text class="sg-h" x="0" y="8">ECOSYSTEM</text>
-          <text class="sg-s" x="300" y="8" text-anchor="end">adoption</text>
-          <line class="sg-base" x1="0" y1="54" x2="300" y2="54"/>
-          <polyline class="sg-pkg" points="0.0,48.7 7.7,46.0 15.4,46.0 23.1,50.6 30.8,49.8 38.5,46.5 46.2,44.3 53.8,44.9 61.5,49.0 69.2,47.4 76.9,44.0 84.6,41.7 92.3,43.0 100.0,44.7 107.7,44.7 115.4,40.1 123.1,37.5 130.8,39.3 138.5,42.1 146.2,40.1 153.8,34.5 161.5,35.6 169.2,36.5 176.9,39.1 184.6,36.3 192.3,32.2 200.0,31.6 207.7,33.3 215.4,35.2 223.1,30.5 230.8,26.6 238.5,27.7 246.2,30.1 253.8,30.9 261.5,26.7 269.2,23.1 276.9,23.1 284.6,26.3 292.3,25.4 300.0,20.2"/>
-          <text class="sg-h" x="0" y="80">PRODUCT RUNTIME</text>
-          <text class="sg-s" x="300" y="80" text-anchor="end">usage</text>
-          <line class="sg-base" x1="0" y1="126" x2="300" y2="126"/>
-          <polyline class="sg-cli" points="0.0,109.1 7.7,98.8 15.4,100.2 23.1,98.8 30.8,119.4 38.5,116.1 46.2,119.8 53.8,107.1 61.5,97.2 69.2,102.0 76.9,98.0 84.6,120.1 92.3,116.6 100.0,119.0 107.7,109.4 115.4,98.3 123.1,102.9 130.8,99.4 138.5,117.8 146.2,115.9 153.8,118.6 161.5,108.3 169.2,97.6 176.9,100.6 184.6,100.0 192.3,119.2 200.0,114.8 207.7,118.4 215.4,107.3 223.1,97.8 230.8,102.5 238.5,99.9 246.2,118.6 253.8,114.2 261.5,118.9 269.2,107.6 276.9,99.0 284.6,100.1 292.3,102.7 300.0,119.5"/>
-          <text class="sg-h" x="0" y="152">AGENT RUNTIME</text>
-          <text class="sg-s" x="300" y="152" text-anchor="end">latency</text>
-          <line class="sg-base" x1="0" y1="198" x2="300" y2="198"/>
-          <polyline class="sg-cap" points="0.0,177.9 7.7,178.0 15.4,178.1 23.1,176.5 30.8,177.9 38.5,177.7 46.2,177.3 53.8,176.3 61.5,178.1 69.2,177.2 76.9,177.0 84.6,176.2 92.3,176.4 100.0,176.2 107.7,177.2 115.4,174.1 123.1,167.1 130.8,161.9 138.5,165.8 146.2,174.7 153.8,177.4 161.5,177.7 169.2,185.3 176.9,184.7 184.6,184.5 192.3,185.2 200.0,185.8 207.7,184.9 215.4,185.0 223.1,184.5 230.8,183.7 238.5,184.3 246.2,184.7 253.8,184.4 261.5,184.3 269.2,185.7 276.9,183.8 284.6,184.1 292.3,183.8 300.0,184.0"/>
+          <text class="sg-s" x="300" y="8" text-anchor="end">health 86 / 100</text>
+          <text class="sg-l" x="0" y="29">Maintenance</text>
+          <rect class="sg-track" x="104" y="24" width="148" height="6"/>
+          <rect class="sg-fill-pkg" x="104" y="24" width="148.0" height="6"/>
+          <text class="sg-v" x="300" y="29" text-anchor="end">20/20</text>
+          <text class="sg-l" x="0" y="43">Community</text>
+          <rect class="sg-track" x="104" y="38" width="148" height="6"/>
+          <rect class="sg-fill-pkg" x="104" y="38" width="49.3" height="6"/>
+          <text class="sg-v" x="300" y="43" text-anchor="end">5/15</text>
+          <text class="sg-l" x="0" y="57">Documentation</text>
+          <rect class="sg-track" x="104" y="52" width="148" height="6"/>
+          <rect class="sg-fill-pkg" x="104" y="52" width="108.5" height="6"/>
+          <text class="sg-v" x="300" y="57" text-anchor="end">11/15</text>
+          <text class="sg-l" x="0" y="71">Releases</text>
+          <rect class="sg-track" x="104" y="66" width="148" height="6"/>
+          <rect class="sg-fill-pkg" x="104" y="66" width="148.0" height="6"/>
+          <text class="sg-v" x="300" y="71" text-anchor="end">15/15</text>
+          <text class="sg-h" x="0" y="108">PRODUCT RUNTIME</text>
+          <text class="sg-s" x="300" y="108" text-anchor="end">invocations · p95</text>
+          <rect class="sg-fill-cli" x="1.0" y="140.3" width="8.7" height="11.7"/>
+          <rect class="sg-fill-cli" x="11.7" y="128.5" width="8.7" height="23.5"/>
+          <rect class="sg-fill-cli" x="22.4" y="131.9" width="8.7" height="20.1"/>
+          <rect class="sg-fill-cli" x="33.1" y="132.6" width="8.7" height="19.4"/>
+          <rect class="sg-fill-cli" x="43.9" y="142.5" width="8.7" height="9.5"/>
+          <rect class="sg-fill-cli" x="54.6" y="149.3" width="8.7" height="2.7"/>
+          <rect class="sg-fill-cli" x="65.3" y="143.6" width="8.7" height="8.4"/>
+          <rect class="sg-fill-cli" x="76.0" y="139.3" width="8.7" height="12.7"/>
+          <rect class="sg-fill-cli" x="86.7" y="130.8" width="8.7" height="21.2"/>
+          <rect class="sg-fill-cli" x="97.4" y="122.4" width="8.7" height="29.6"/>
+          <rect class="sg-fill-cli" x="108.1" y="138.0" width="8.7" height="14.0"/>
+          <rect class="sg-fill-cli" x="118.9" y="141.6" width="8.7" height="10.4"/>
+          <rect class="sg-fill-cli" x="129.6" y="145.6" width="8.7" height="6.4"/>
+          <rect class="sg-fill-cli" x="140.3" y="146.7" width="8.7" height="5.3"/>
+          <rect class="sg-fill-cli" x="151.0" y="131.8" width="8.7" height="20.2"/>
+          <rect class="sg-fill-cli" x="161.7" y="129.0" width="8.7" height="23.0"/>
+          <rect class="sg-fill-cli" x="172.4" y="126.6" width="8.7" height="25.4"/>
+          <rect class="sg-fill-cli" x="183.1" y="125.0" width="8.7" height="27.0"/>
+          <rect class="sg-fill-cli" x="193.9" y="141.0" width="8.7" height="11.0"/>
+          <rect class="sg-fill-cli" x="204.6" y="145.0" width="8.7" height="7.0"/>
+          <rect class="sg-fill-cli" x="215.3" y="139.4" width="8.7" height="12.6"/>
+          <rect class="sg-fill-cli" x="226.0" y="139.0" width="8.7" height="13.0"/>
+          <rect class="sg-fill-cli" x="236.7" y="123.7" width="8.7" height="28.3"/>
+          <rect class="sg-fill-cli" x="247.4" y="123.1" width="8.7" height="28.9"/>
+          <rect class="sg-fill-cli" x="258.1" y="134.2" width="8.7" height="17.8"/>
+          <rect class="sg-fill-cli" x="268.9" y="135.2" width="8.7" height="16.8"/>
+          <rect class="sg-fill-cli" x="279.6" y="144.6" width="8.7" height="7.4"/>
+          <rect class="sg-fill-cli" x="290.3" y="142.3" width="8.7" height="9.7"/>
+          <line class="sg-base" x1="0" y1="152" x2="300" y2="152"/>
+          <text class="sg-l" x="0" y="161">invocations</text>
+          <polyline class="sg-cli" points="5.4,181.9 16.1,179.0 26.8,182.6 37.5,184.0 48.2,181.6 58.9,180.8 69.6,184.7 80.4,185.2 91.1,180.5 101.8,181.7 112.5,185.1 123.2,184.0 133.9,182.9 144.6,185.6 155.4,187.5 166.1,185.6 176.8,182.9 187.5,187.1 198.2,186.5 208.9,184.8 219.6,184.1 230.4,187.6 241.1,188.7 251.8,185.7 262.5,186.1 273.2,189.7 283.9,186.0 294.6,186.3"/>
+          <line class="sg-base" x1="0" y1="196" x2="300" y2="196"/>
+          <text class="sg-l" x="0" y="205">p95 ms</text>
+          <text class="sg-h" x="0" y="232">AGENT RUNTIME</text>
+          <text class="sg-s" x="300" y="232" text-anchor="end">context retrieval drift</text>
+          <line class="sg-ref" x1="0" y1="250" x2="300" y2="250"/>
+          <text class="sg-l" x="300" y="247" text-anchor="end">baseline</text>
+          <polyline class="sg-cap" points="0.0,249.0 7.7,252.5 15.4,251.4 23.1,247.5 30.8,247.6 38.5,251.0 46.2,253.0 53.8,249.8 61.5,246.9 69.2,249.5 76.9,251.2 84.6,249.6 92.3,248.8 100.0,248.5 107.7,252.8 115.4,253.6 123.1,251.1 130.8,252.0 138.5,253.7 146.2,257.9 153.8,256.1 161.5,255.2 169.2,256.5 176.9,260.5 184.6,263.6 192.3,261.6 200.0,260.4 207.7,265.3 215.4,266.8 223.1,266.9 230.8,266.7 238.5,268.2 246.2,271.1 253.8,274.7 261.5,271.4 269.2,271.7 276.9,276.7 284.6,279.0 292.3,278.5 300.0,276.9"/>
+          <rect class="sg-dot-cap" x="297.0" y="273.9" width="6" height="6"/>
+          <line class="sg-base" x1="0" y1="286" x2="300" y2="286"/>
         </svg>
         <p class="signal-caption">Illustrative</p>
       </div>
-    </div>
   </div>
 </section>
 
