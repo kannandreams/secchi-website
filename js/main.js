@@ -27,7 +27,10 @@
   /* ---- Demo terminal: type the real command, reveal the real output. ---- */
   var body = document.getElementById("terminal-body");
   var terminal = document.getElementById("terminal");
-  var tabs = Array.prototype.slice.call(document.querySelectorAll(".tab"));
+  // Scoped to [data-demo] specifically: .tab is reused by the per-product
+  // install/code tabs too, and a bare ".tab" selector here would cross-talk
+  // between unrelated tab groups on click.
+  var tabs = Array.prototype.slice.call(document.querySelectorAll(".tab[data-demo]"));
   var demos = window.SECCHI_DEMOS || {};
   var runToken = 0;
 
@@ -166,4 +169,52 @@
       });
     });
   });
+
+  /* ---- "See it in your terminal" deep link: scrolls to the demo section
+     (native #demo anchor) and also selects the matching demo tab, so the
+     visitor lands on the right output instead of always the first tab. ---- */
+  Array.prototype.slice.call(document.querySelectorAll("[data-select-demo]")).forEach(function (link) {
+    link.addEventListener("click", function () {
+      var key = link.getAttribute("data-select-demo");
+      var demoTab = document.querySelector('.tab[data-demo="' + key + '"]');
+      if (demoTab) demoTab.click();
+    });
+  });
+
+  /* ---- Screenshot modal: opens a full-size real asset only. No video or
+     placeholder is wired up until a real one exists to show. ---- */
+  var modalOverlay = document.getElementById("modal-overlay");
+  var modalImg = document.getElementById("modal-img");
+  var modalClose = document.getElementById("modal-close");
+  if (modalOverlay && modalImg && modalClose) {
+    var modalTrigger = null;
+
+    function openModal(src, alt) {
+      modalImg.src = src;
+      modalImg.alt = alt || "";
+      modalOverlay.hidden = false;
+      document.body.style.overflow = "hidden";
+      modalClose.focus();
+    }
+    function closeModal() {
+      modalOverlay.hidden = true;
+      modalImg.src = "";
+      document.body.style.overflow = "";
+      if (modalTrigger) modalTrigger.focus();
+    }
+
+    Array.prototype.slice.call(document.querySelectorAll("[data-modal-src]")).forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        modalTrigger = btn;
+        openModal(btn.getAttribute("data-modal-src"), btn.getAttribute("data-modal-alt"));
+      });
+    });
+    modalClose.addEventListener("click", closeModal);
+    modalOverlay.addEventListener("click", function (e) {
+      if (e.target === modalOverlay) closeModal();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !modalOverlay.hidden) closeModal();
+    });
+  }
 })();

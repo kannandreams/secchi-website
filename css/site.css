@@ -1,8 +1,9 @@
 /* SECCHI.DEV — landing page.
-   Design system: black & white base, three-color functional code.
+   Design system: black & white base, four-color functional code.
    Each color has exactly one job and never trades jobs:
-     --pkg  #7CFFB2  Package Intelligence (and nothing else)
-     --cli  #FFB000  CLI Analytics        (and nothing else)
+     --pkg  #7CFFB2  Package Intelligence    (and nothing else)
+     --cli  #FFB000  CLI Analytics           (and nothing else)
+     --cap  #C084FC  Capability Intelligence (and nothing else; planned)
      --act  #22D3EE  interaction: links, buttons, focus (and nothing else)
    No rounded corners anywhere. Titles: Space Grotesk. Everything else:
    JetBrains Mono. */
@@ -40,6 +41,7 @@
   --line: #2a2a2a;
   --pkg: #7CFFB2;
   --cli: #FFB000;
+  --cap: #C084FC;
   --act: #22D3EE;
   --rail: 64px;          /* depth-gauge width on desktop */
   --measure: 72rem;
@@ -77,6 +79,7 @@ code { font-family: inherit; }
 /* Product-color roles */
 .c-pkg { color: var(--pkg); font-weight: 500; }
 .c-cli { color: var(--cli); font-weight: 500; }
+.c-cap { color: var(--cap); font-weight: 500; }
 
 /* ---- Secchi-disk glyph: 2×2 quadrant, square. ---- */
 .disk-glyph {
@@ -199,28 +202,55 @@ code { font-family: inherit; }
 .btn-solid { background: var(--act); color: var(--bg); }
 .btn-solid:hover { background: transparent; color: var(--act); }
 
-/* ---- Two-product split ---- */
-/* Full-bleed by design: the green/amber top border is a section-break
+/* ---- Instrument rows ---- */
+/* Full-bleed by design: each row's colored top border is a section-break
    accent and should reach the screen edge, not stop at the reading
    width. Paragraph text inside stays comfortably narrow via its own
-   max-width (see .product p below), independent of the column width. */
-.products {
+   max-width, independent of row width. Each instrument is a full-width
+   row (text column + visual column) rather than a side-by-side card, so
+   three products don't cramp into narrow columns. */
+.instruments { border-top: 1px solid var(--line); }
+.instrument {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  border-top: 1px solid var(--line);
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 48px;
+  padding: 56px 32px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
 }
-.product { padding: 56px 32px 64px; background: var(--bg); }
-.product-pkg { border-right: 1px solid var(--line); border-top: 3px solid var(--pkg); }
-.product-cli { border-top: 3px solid var(--cli); }
+.instrument-pkg { border-top: 3px solid var(--pkg); }
+.instrument-cli { border-top: 3px solid var(--cli); }
+.instrument-cap { border-top: 3px dashed var(--cap); }
+.instrument-text { max-width: 62ch; }
+.instrument-visual {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 14px;
+}
 .product-label {
   font-size: 13px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   margin-bottom: 20px;
 }
-.product h2, .section-title { font-size: 30px; font-weight: 700; margin-bottom: 18px; }
-.product p:not(.product-label) { color: var(--muted); max-width: 52ch; }
-.product p strong { color: var(--fg); }
+.instrument h2, .section-title { font-size: 30px; font-weight: 700; margin-bottom: 18px; }
+.instrument-text p:not(.product-label) { color: var(--muted); max-width: 52ch; }
+.instrument-text p strong { color: var(--fg); }
+
+.tag-planned {
+  margin-left: 10px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  padding: 2px 8px;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+.visual-caption { font-size: 12px; color: var(--muted); }
+.btn-view { font-size: 13px; padding: 12px 20px; }
 
 /* Icon strip: real registry marks, monochrome via mask so a single-color
    SVG can be recolored with a plain background-color. Muted by default,
@@ -249,7 +279,7 @@ code { font-family: inherit; }
   -webkit-mask-size: contain;
 }
 .ecosystems li:hover { color: var(--fg); }
-.product-pkg .ecosystems li:hover .ico { background-color: var(--pkg); }
+.instrument-pkg .ecosystems li:hover .ico { background-color: var(--pkg); }
 .ico-pypi { mask-image: url(/assets/icons/pypi.svg); -webkit-mask-image: url(/assets/icons/pypi.svg); }
 .ico-npm { mask-image: url(/assets/icons/npm.svg); -webkit-mask-image: url(/assets/icons/npm.svg); }
 .ico-crates { mask-image: url(/assets/icons/crates.svg); -webkit-mask-image: url(/assets/icons/crates.svg); }
@@ -281,14 +311,9 @@ code { font-family: inherit; }
 .install-line[hidden] { display: none; }
 .install-line .prompt { color: var(--muted); flex: none; }
 
-.shot { margin-top: 6px; }
-.shot img { width: 100%; height: auto; display: block; border: 1px solid var(--line); }
-.shot figcaption { font-size: 12px; color: var(--muted); margin-top: 10px; }
-
-/* Real integration code, positioned the same way .shot positions the
-   dashboard screenshot: the "here's the product" beat for CLI analytics.
-   Shares the .cmd/.tabs-sm pattern the install commands use, so tabbed
-   code reads as unmistakably a code block, not flowing text. */
+/* Real integration code. Shares the .cmd/.tabs-sm pattern the install
+   commands use, so tabbed code reads as unmistakably a code block, not
+   flowing text. */
 .code-block {
   margin: 0;
   padding: 16px 18px;
@@ -318,8 +343,9 @@ code { font-family: inherit; }
   left: 0; top: 0.55em;
   width: 8px; height: 8px;
 }
-.product-cli .ticks li::before, .ticks-cli li::before { background: var(--cli); }
+.instrument-cli .ticks li::before, .ticks-cli li::before { background: var(--cli); }
 .ticks-pkg li::before { background: var(--pkg); }
+.ticks-cap li::before { background: var(--cap); }
 .ticks li code { color: var(--fg); }
 
 .roadmap-note {
@@ -394,8 +420,8 @@ code { font-family: inherit; }
 .caps { border-top: 1px solid var(--line); padding: 72px 32px 64px; }
 .caps-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 56px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
   max-width: var(--measure);
   margin-top: 36px;
 }
@@ -434,15 +460,51 @@ code { font-family: inherit; }
 }
 .footer-note { color: var(--muted); margin-top: 10px; }
 
+/* ---- Screenshot modal ---- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  z-index: 100;
+}
+.modal-overlay[hidden] { display: none; }
+.modal-box {
+  max-width: 1100px;
+  max-height: 85vh;
+  border: 1px solid var(--line);
+  background: var(--bg);
+}
+.modal-box img { display: block; width: 100%; height: auto; max-height: 85vh; object-fit: contain; }
+.modal-close {
+  position: fixed;
+  top: 24px;
+  right: 32px;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid var(--fg);
+  color: var(--fg);
+  font-family: inherit;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 101;
+}
+.modal-close:hover { background: var(--act); border-color: var(--act); color: var(--bg); }
+
 /* ---- Responsive ---- */
 @media (max-width: 900px) {
   body { padding-left: 0; }
   .gauge { display: none; }
-  .products, .caps-grid, .footer { grid-template-columns: 1fr; }
-  .product-pkg { border-right: none; }
+  .instrument, .caps-grid, .footer { grid-template-columns: 1fr; }
   .hero { padding-top: 64px; }
   .nav { padding: 16px 20px; }
   .hero, .demo, .caps, .strip { padding-left: 20px; padding-right: 20px; }
-  .product { padding: 40px 20px 48px; }
+  .instrument { padding: 40px 20px 48px; }
   .footer { padding: 40px 20px 56px; }
+  .modal-overlay { padding: 16px; }
+  .modal-close { top: 16px; right: 16px; }
 }
