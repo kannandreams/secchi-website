@@ -169,7 +169,20 @@ ul { list-style: none; }
   letter-spacing: 0.14em;
 }
 .wordmark:hover { text-decoration: none; }
-.wordmark-mark { height: 26px; width: auto; flex: none; }
+/* Round border tracing the disk itself. One deliberate exception to
+   the site's no-rounded-corners rule (border-radius: 0 !important on
+   *): the disk is a real round object, so its own frame gets to be
+   round too. Nothing else on the page does this. */
+.wordmark-mark-frame {
+  display: block;
+  width: 34px;
+  height: 19px;
+  border: 1px solid var(--fg) !important;
+  border-radius: 50% !important;
+  overflow: hidden;
+  flex: none;
+}
+.wordmark-mark { display: block; width: 100%; height: 100%; object-fit: cover; }
 .nav-links { display: flex; align-items: center; gap: 28px; font-size: 14px; }
 
 /* Solutions dropdown. Click to open (keyboard and touch), hover to open
