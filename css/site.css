@@ -200,10 +200,13 @@ code { font-family: inherit; }
 .btn-solid:hover { background: transparent; color: var(--act); }
 
 /* ---- Two-product split ---- */
+/* Full-bleed by design: the green/orange top border is a section-break
+   accent and should reach the screen edge, not stop at the reading
+   width. Paragraph text inside stays comfortably narrow via its own
+   max-width (see .product p below), independent of the column width. */
 .products {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  max-width: var(--measure);
   border-top: 1px solid var(--line);
 }
 .product { padding: 56px 32px 64px; }
@@ -396,7 +399,7 @@ code { font-family: inherit; }
 @keyframes reveal { from { opacity: 0; } }
 
 /* ---- Capabilities ---- */
-.caps { border-top: 1px solid var(--line); max-width: var(--measure); padding: 72px 32px 64px; }
+.caps { border-top: 1px solid var(--line); padding: 72px 32px 64px; }
 .caps-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -425,7 +428,6 @@ code { font-family: inherit; }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 32px;
-  max-width: var(--measure);
   padding: 48px 32px 64px;
   font-size: 13px;
 }
