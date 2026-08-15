@@ -1,4 +1,5 @@
-// Landing-page behavior: the depth gauge, and the demo terminal.
+// Landing-page behavior: the depth gauge, the Solutions menu, the per-row
+// demo terminals, tabbed command groups, and the screenshot modal.
 // Vanilla JS, no dependencies. All motion respects prefers-reduced-motion.
 
 (function () {
@@ -24,34 +25,81 @@
   window.addEventListener("resize", updateGauge);
   updateGauge();
 
-  /* ---- Demo terminal: type the real command, reveal the real output. ---- */
-  var body = document.getElementById("terminal-body");
-  var terminal = document.getElementById("terminal");
-  // Scoped to [data-demo] specifically: .tab is reused by the per-product
-  // install/code tabs too, and a bare ".tab" selector here would cross-talk
-  // between unrelated tab groups on click.
-  var tabs = Array.prototype.slice.call(document.querySelectorAll(".tab[data-demo]"));
+  /* ---- Solutions menu: click toggles (keyboard, touch); on devices with
+     a real pointer, hovering the trigger opens it too. Escape, an outside
+     click, or choosing an item closes it. ---- */
+  Array.prototype.slice.call(document.querySelectorAll("[data-menu]")).forEach(function (menu) {
+    var toggle = menu.querySelector(".menu-toggle");
+    var panel = menu.querySelector(".menu-panel");
+    if (!toggle || !panel) return;
+    var closeTimer = null;
+    var hoverOpened = false;
+
+    function setOpen(open) {
+      panel.hidden = !open;
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+    function cancelClose() {
+      if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+    }
+
+    toggle.addEventListener("click", function () {
+      // If hover already opened it, the first click confirms rather than
+      // toggles, so a mouse user never sees the panel flash shut.
+      if (hoverOpened) { hoverOpened = false; setOpen(true); return; }
+      setOpen(panel.hidden);
+    });
+    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      menu.addEventListener("mouseenter", function () {
+        cancelClose();
+        if (panel.hidden) { hoverOpened = true; setOpen(true); }
+      });
+      menu.addEventListener("mouseleave", function () {
+        cancelClose();
+        closeTimer = setTimeout(function () { hoverOpened = false; setOpen(false); }, 220);
+      });
+    }
+    Array.prototype.slice.call(panel.querySelectorAll("a")).forEach(function (item) {
+      item.addEventListener("click", function () { setOpen(false); });
+    });
+    document.addEventListener("click", function (e) {
+      if (!panel.hidden && !menu.contains(e.target)) setOpen(false);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !panel.hidden) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+    // Close when focus leaves the menu entirely (tabbing past the last item).
+    menu.addEventListener("focusout", function (e) {
+      if (!menu.contains(e.relatedTarget)) setOpen(false);
+    });
+  });
+
+  /* ---- Demo terminals: one per product row. Each types the real
+     command and reveals the real captured output, starting when it
+     scrolls into view. ---- */
   var demos = window.SECCHI_DEMOS || {};
-  var runToken = 0;
 
   function esc(text) {
     return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 
-  function renderStatic(demo) {
-    var html = '<span class="prompt">$ </span><span class="cmd">' + esc(demo.command) + "</span>\n";
+  function renderStatic(body, demo) {
+    var html = '<span class="prompt">$ </span><span class="tcmd">' + esc(demo.command) + "</span>\n";
     html += demo.lines.map(function (line) { return esc(line); }).join("\n");
     if (demo.command2) {
-      html += '\n\n<span class="prompt">$ </span><span class="cmd">' + esc(demo.command2) + "</span>\n";
+      html += '\n\n<span class="prompt">$ </span><span class="tcmd">' + esc(demo.command2) + "</span>\n";
       html += demo.lines2.map(function (line) { return esc(line); }).join("\n");
     }
     body.innerHTML = html;
   }
 
-  function typeCommand(command, token, done) {
+  function typeCommand(body, command, done) {
     var i = 0;
     var cmdSpan = document.createElement("span");
-    cmdSpan.className = "cmd";
+    cmdSpan.className = "tcmd";
     var cursor = document.createElement("span");
     cursor.className = "cursor";
     var prompt = document.createElement("span");
@@ -62,14 +110,12 @@
     body.appendChild(cursor);
 
     (function step() {
-      if (token !== runToken) return;
       if (i < command.length) {
         cmdSpan.textContent += command.charAt(i);
         i += 1;
         setTimeout(step, 34);
       } else {
         setTimeout(function () {
-          if (token !== runToken) return;
           cursor.remove();
           body.appendChild(document.createTextNode("\n"));
           done();
@@ -78,10 +124,9 @@
     })();
   }
 
-  function revealLines(lines, token, done) {
+  function revealLines(body, lines, done) {
     var i = 0;
     (function step() {
-      if (token !== runToken) return;
       if (i < lines.length) {
         var out = document.createElement("span");
         out.className = "out";
@@ -95,55 +140,46 @@
     })();
   }
 
-  function play(key) {
+  function play(terminal) {
+    var key = terminal.getAttribute("data-terminal");
+    var body = terminal.querySelector(".terminal-body");
     var demo = demos[key];
     if (!demo || !body) return;
     terminal.setAttribute("data-active", key);
     body.innerHTML = "";
     if (reducedMotion) {
-      renderStatic(demo);
+      renderStatic(body, demo);
       return;
     }
-    var token = ++runToken;
-    typeCommand(demo.command, token, function () {
-      revealLines(demo.lines, token, function () {
+    typeCommand(body, demo.command, function () {
+      revealLines(body, demo.lines, function () {
         if (!demo.command2) return;
         body.appendChild(document.createTextNode("\n"));
-        typeCommand(demo.command2, token, function () {
-          revealLines(demo.lines2, token, null);
+        typeCommand(body, demo.command2, function () {
+          revealLines(body, demo.lines2, null);
         });
       });
     });
   }
 
-  tabs.forEach(function (tab) {
-    tab.addEventListener("click", function () {
-      tabs.forEach(function (t) {
-        t.classList.toggle("is-active", t === tab);
-        t.setAttribute("aria-selected", t === tab ? "true" : "false");
-      });
-      play(tab.getAttribute("data-demo"));
-    });
+  Array.prototype.slice.call(document.querySelectorAll("[data-terminal]")).forEach(function (terminal) {
+    var started = false;
+    function start() {
+      if (started) return;
+      started = true;
+      play(terminal);
+    }
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries, observer) {
+        if (entries.some(function (entry) { return entry.isIntersecting; })) {
+          observer.disconnect();
+          start();
+        }
+      }, { threshold: 0.3 }).observe(terminal);
+    } else {
+      start();
+    }
   });
-
-  // Start the first demo when it scrolls into view (or immediately if the
-  // browser lacks IntersectionObserver).
-  var started = false;
-  function start() {
-    if (started) return;
-    started = true;
-    play("pkg");
-  }
-  if ("IntersectionObserver" in window && terminal) {
-    new IntersectionObserver(function (entries, observer) {
-      if (entries.some(function (entry) { return entry.isIntersecting; })) {
-        observer.disconnect();
-        start();
-      }
-    }, { threshold: 0.3 }).observe(terminal);
-  } else {
-    start();
-  }
 
   /* ---- Per-product tabbed groups: install commands ("Try first" / uv /
      pip / cargo) and the CLI analytics integration code (clap / click).
@@ -167,17 +203,6 @@
           caption.hidden = caption.getAttribute("data-cmd-caption") !== key;
         });
       });
-    });
-  });
-
-  /* ---- "See it in your terminal" deep link: scrolls to the demo section
-     (native #demo anchor) and also selects the matching demo tab, so the
-     visitor lands on the right output instead of always the first tab. ---- */
-  Array.prototype.slice.call(document.querySelectorAll("[data-select-demo]")).forEach(function (link) {
-    link.addEventListener("click", function () {
-      var key = link.getAttribute("data-select-demo");
-      var demoTab = document.querySelector('.tab[data-demo="' + key + '"]');
-      if (demoTab) demoTab.click();
     });
   });
 

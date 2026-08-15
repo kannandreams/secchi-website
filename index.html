@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Secchi: Analytics for Packages, CLIs, and Agents</title>
-<meta name="description" content="Secchi is analytics for packages, CLIs, and agents: package health for the dependencies you choose, usage analytics for the tools you ship.">
+<title>Secchi: Product Signals Platform for DevTools and Agents</title>
+<meta name="description" content="Secchi is a product signals platform built for DevTools and agents. Understand how your packages, CLIs, SDKs, and agent capabilities are adopted and used.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://secchi.dev/">
-<meta property="og:title" content="Secchi: Analytics for Packages, CLIs, and Agents">
-<meta property="og:description" content="Package analytics, CLI usage analytics, and agent capability analytics.">
+<meta property="og:title" content="Secchi: Product Signals Platform for DevTools and Agents">
+<meta property="og:description" content="Understand how your packages, CLIs, SDKs, and agent capabilities are adopted and used.">
 <meta property="og:url" content="https://secchi.dev/">
 <meta property="og:image" content="https://secchi.dev/assets/secchi-dashboard-preview.png">
 <link rel="stylesheet" href="/css/site.css">
@@ -29,7 +29,26 @@
     <span class="disk-glyph"><i></i><i></i><i></i><i></i></span>
     <span class="wordmark-text" data-text="SECCHI">SECCHI</span>
   </a>
-  <nav class="nav-links">
+  <nav class="nav-links" aria-label="Primary">
+    <div class="menu" data-menu>
+      <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="solutions-menu">
+        <span class="menu-label">Solutions</span> <span class="menu-caret" aria-hidden="true">&#9662;</span>
+      </button>
+      <div class="menu-panel" id="solutions-menu" hidden>
+        <a class="menu-item" href="#package-signals">
+          <span class="menu-item-title c-pkg">Package Signals</span>
+          <span class="menu-item-desc">Understand package adoption, health, dependencies, and ecosystem activity.</span>
+        </a>
+        <a class="menu-item" href="#product-usage-signals">
+          <span class="menu-item-title c-cli">CLI Signals</span>
+          <span class="menu-item-desc">Understand how your CLI is used, where it fails, and how usage evolves.</span>
+        </a>
+        <a class="menu-item" href="#agent-signals">
+          <span class="menu-item-title c-cap">Agent Signals <span class="tag-planned">Planned</span></span>
+          <span class="menu-item-desc">Understand agent capabilities, context usage, and execution.</span>
+        </a>
+      </div>
+    </div>
     <a href="https://docs.secchi.dev/">Docs</a>
     <a href="https://github.com/kannandreams/secchi">GitHub</a>
   </nav>
@@ -37,35 +56,80 @@
 
 <main>
 
+<!-- 01 HERO -->
 <section class="hero">
-  <h1>ANALYTICS FOR<br>
-    <span class="c-pkg">PACKAGES.</span><br>
-    <span class="c-cli">CLIs.</span><br>
-    <span class="c-cap">AGENTS.</span></h1>
-  <p class="hero-sub">Package analytics, CLI usage analytics, and agent
-  capability analytics.</p>
+  <h1>PRODUCT<br>SIGNALS<br>PLATFORM.</h1>
+  <p class="hero-tag">Built for DevTools &amp; Agents.</p>
+  <p class="hero-sub">Understand how your packages, CLIs, SDKs, and agent
+  capabilities are adopted and used.</p>
   <div class="hero-cta">
-    <a class="btn btn-solid" href="https://docs.secchi.dev/getting-started/">Read the docs</a>
+    <a class="btn btn-solid" href="https://docs.secchi.dev/getting-started/">Get started</a>
     <a class="btn" href="https://github.com/kannandreams/secchi">View on GitHub</a>
   </div>
 </section>
 
-<section class="instruments" id="products">
-  <div class="instrument instrument-pkg">
-    <div class="instrument-text">
-      <p class="product-label c-pkg">■ Package analytics</p>
-      <h2>Is this dependency healthy?</h2>
-      <p>One command combines registry metadata, download activity, release
-      history, GitHub signals, dependency data, and security advisories into
-      a single health picture, across PyPI, npm, crates.io, Homebrew, Go,
-      and CRAN. In the terminal, in reports, or over MCP for coding
-      agents.</p>
-      <button type="button" class="btn btn-view" data-modal-src="/assets/secchi-dashboard-preview.png"
-              data-modal-alt="The Secchi terminal dashboard showing adoption, health score, and version metrics for a package">
-        &#9654; Live Demo
-      </button>
+<!-- 02 PLATFORM IDEA -->
+<section class="platform" id="platform">
+  <h2 class="section-title">See your product from ecosystem to runtime.</h2>
+  <p class="section-sub">A product signal is any measurable trace your product
+  leaves behind: in a registry, on a machine, or inside an agent's run.
+  Secchi collects the three families and reads them together.</p>
+
+  <div class="flow" aria-label="Signal families feeding Secchi">
+    <div class="flow-cols">
+      <div class="flow-col flow-col-pkg">
+        <p class="flow-head c-pkg">Ecosystem</p>
+        <ul>
+          <li>Packages</li>
+          <li>Registries</li>
+          <li>GitHub</li>
+          <li>Adoption</li>
+        </ul>
+      </div>
+      <div class="flow-col flow-col-cli">
+        <p class="flow-head c-cli">Product usage</p>
+        <ul>
+          <li>CLI</li>
+          <li>SDK</li>
+          <li>Commands</li>
+          <li>Errors</li>
+        </ul>
+      </div>
+      <div class="flow-col flow-col-cap">
+        <p class="flow-head c-cap">Agent</p>
+        <ul>
+          <li>Tools</li>
+          <li>MCP</li>
+          <li>Context</li>
+          <li>Capabilities</li>
+        </ul>
+      </div>
     </div>
-    <div class="instrument-visual">
+    <div class="flow-join" aria-hidden="true">
+      <div class="flow-drops"><i></i><i></i><i></i></div>
+      <div class="flow-bar"></div>
+      <div class="flow-stem"></div>
+      <div class="flow-arrow">&#9660;</div>
+    </div>
+    <div class="flow-sink">
+      <span class="disk-glyph" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span class="flow-sink-name">SECCHI</span>
+    </div>
+    <p class="flow-sink-sub">Product Signals Platform</p>
+  </div>
+</section>
+
+<section class="instruments" id="products">
+
+  <!-- 03 PACKAGE SIGNALS -->
+  <div class="instrument instrument-pkg" id="package-signals">
+    <div class="instrument-text">
+      <p class="product-label c-pkg">■ Package signals</p>
+      <h2>Understand your ecosystem.</h2>
+      <p>Registry metadata, downloads, releases, dependencies, security and
+      GitHub activity in one view. Across PyPI, npm, crates.io, Homebrew,
+      Go, and CRAN. In the terminal, in reports, or over MCP for coding
+      agents.</p>
       <ul class="ecosystems" aria-label="Supported package registries">
         <li><span class="ico ico-pypi" aria-hidden="true"></span>PyPI</li>
         <li><span class="ico ico-npm" aria-hidden="true"></span>npm</li>
@@ -86,6 +150,16 @@
           <div class="install-line" data-cmd-panel="pip" hidden><span class="prompt">$ </span><code>pip install secchi</code></div>
         </div>
       </div>
+      <button type="button" class="btn btn-view" data-modal-src="/assets/secchi-dashboard-preview.png"
+              data-modal-alt="The Secchi terminal dashboard showing adoption, health score, and version metrics for a package">
+        &#9654; Dashboard preview
+      </button>
+    </div>
+    <div class="instrument-visual">
+      <div class="terminal" data-terminal="pkg" data-active="pkg">
+        <div class="terminal-bar"><span></span>~/work</div>
+        <pre class="terminal-body" aria-live="polite"></pre>
+      </div>
       <ul class="ticks ticks-pkg mini-ticks">
         <li>Health score 0–100, graded A–F</li>
         <li>Adoption trend across 30d / 90d / 1y</li>
@@ -94,21 +168,18 @@
     </div>
   </div>
 
-  <div class="instrument instrument-cli">
+  <!-- 04 PRODUCT USAGE SIGNALS -->
+  <div class="instrument instrument-cli" id="product-usage-signals">
     <div class="instrument-text">
-      <p class="product-label c-cli">■ CLI analytics</p>
-      <h2>How is your CLI actually used?</h2>
-      <p>Think Google Analytics, but for a command line, built the opposite
-      way around. One line of setup, and you'll see which commands and
-      flags people actually use, where things fail, and whether a human or
-      an AI agent was driving.</p>
+      <p class="product-label c-cli">■ Product usage signals <span class="label-scope">CLI · SDK</span></p>
+      <h2>Understand how your product is actually used.</h2>
+      <p>Instrument your CLI or SDK to understand feature usage, versions,
+      failures and performance without collecting command values or
+      application data.</p>
       <p>It only ever records command and flag <em>names</em>, never the
-      values you typed, never error messages. If a captured value happens
-      to look like a secret, an API key, a token, an email, it's redacted
-      before it's ever written to disk.</p>
-      <a class="btn btn-view" href="#demo" data-select-demo="cli">&#9654; Live Demo</a>
-    </div>
-    <div class="instrument-visual">
+      values you typed, never error messages. Anything that looks like a
+      secret, an API key, a token, an email, is redacted before it's ever
+      written to disk.</p>
       <div class="cmd" data-cmd-group>
         <div class="tabs tabs-sm" role="tablist" aria-label="Install secchi-cli-analytics">
           <button class="tab tab-cli is-active" role="tab" aria-selected="true" data-cmd-tab="cargo">cargo</button>
@@ -141,7 +212,13 @@ analytics.<span class="tok-f">record_exit</span>(&amp;matches, exit_code, error_
         <p class="code-caption" data-cmd-caption="clap">Real integration code, from <code>secchi-analytics-clap</code>. Shipped today.</p>
         <p class="code-caption" data-cmd-caption="click" hidden>The planned Click adapter's API. Not shipped yet.</p>
       </div>
-      <ul class="ticks mini-ticks">
+    </div>
+    <div class="instrument-visual">
+      <div class="terminal" data-terminal="cli" data-active="cli">
+        <div class="terminal-bar"><span></span>~/work</div>
+        <pre class="terminal-body" aria-live="polite"></pre>
+      </div>
+      <ul class="ticks ticks-cli mini-ticks">
         <li>Local-first: useful with zero network, zero account</li>
         <li>Redaction runs even on values you explicitly allow through</li>
         <li>Off with one switch: <code>SECCHI_ANALYTICS=0</code></li>
@@ -151,17 +228,49 @@ analytics.<span class="tok-f">record_exit</span>(&amp;matches, exit_code, error_
     </div>
   </div>
 
-  <div class="instrument instrument-cap instrument-planned">
+  <!-- 05 AGENT SIGNALS -->
+  <div class="instrument instrument-cap instrument-planned" id="agent-signals">
     <div class="instrument-text">
-      <p class="product-label c-cap">■ Agent Capability Analytics <span class="tag-planned">Planned</span></p>
-      <h2>Do you know which capabilities your agents actually use?</h2>
-      <p>Agents rely on MCP servers, skills, and tools, many of which you
-      may not have built yourself. Apply the same analytics discipline used
-      for CLI commands to every capability an agent can access: understand
-      what gets called, how often it succeeds, how long it takes, and which
-      capabilities are rarely or never used.</p>
-      <p>The same engine and privacy principles apply: capture capability
-      names and outcomes, not content. Local-first by default.</p>
+      <p class="product-label c-cap">■ Agent signals <span class="tag-planned">Planned</span></p>
+      <h2>Understand how your agents actually operate.</h2>
+      <p>Agents rely on tools, MCP servers, skills, and context, much of
+      which you didn't build yourself. Agent signals apply the same
+      discipline used for CLI commands to the whole run: which capabilities
+      get used, what context they pull in, and how each execution ends.</p>
+      <p>Same engine, same privacy principles: capability names and
+      outcomes, not content. Local-first by default.</p>
+      <div class="subareas">
+        <div class="subarea">
+          <p class="subarea-head c-cap">Capabilities</p>
+          <ul>
+            <li>tools</li>
+            <li>MCP</li>
+            <li>skills</li>
+            <li>usage</li>
+            <li>success</li>
+          </ul>
+        </div>
+        <div class="subarea">
+          <p class="subarea-head c-cap">Context</p>
+          <ul>
+            <li>sources</li>
+            <li>retrieval</li>
+            <li>tokens</li>
+            <li>injection</li>
+            <li>growth</li>
+          </ul>
+        </div>
+        <div class="subarea">
+          <p class="subarea-head c-cap">Execution</p>
+          <ul>
+            <li>runs</li>
+            <li>latency</li>
+            <li>failures</li>
+            <li>retries</li>
+            <li>outcomes</li>
+          </ul>
+        </div>
+      </div>
     </div>
     <div class="instrument-visual">
       <pre class="code-block">Capability             Invoked  Success Avg latency
@@ -169,7 +278,7 @@ github.search_code       1,842      94%       420ms
 shell.exec                1,204      88%        1.2s
 postgres-debugging          341      91%        3.4s
 linear.create_issue         128      97%       610ms
-security-agent                42      71%       18.2s
+security-agent                42      71%      18.2s
 browser                       12      58%        4.1s
 
 Unused capabilities
@@ -187,66 +296,94 @@ docs-search-v1</pre>
   </div>
 </section>
 
-<section class="demo" id="demo">
-  <h2 class="section-title">In practice</h2>
-  <p class="section-sub">Switch between the two to see exactly what each
-  one shows you.</p>
-  <div class="tabs" role="tablist" aria-label="Product demo">
-    <button class="tab tab-pkg is-active" role="tab" aria-selected="true"
-            data-demo="pkg">secchi show duckdb</button>
-    <button class="tab tab-cli" role="tab" aria-selected="false"
-            data-demo="cli">secchi-analytics stats</button>
+<!-- 06 HOW SECCHI WORKS -->
+<section class="how" id="how">
+  <p class="section-eyebrow">How Secchi works</p>
+  <h2 class="section-title">From signals to answers.</h2>
+  <div class="pipe" aria-label="Collect, store, understand">
+    <div class="pipe-stage">
+      <p class="pipe-head">Collect</p>
+      <ul class="pipe-sources">
+        <li><span class="dot dot-pkg"></span>Registries</li>
+        <li><span class="dot dot-pkg"></span>GitHub</li>
+        <li><span class="dot dot-cli"></span>CLI</li>
+        <li><span class="dot dot-cli"></span>SDK</li>
+        <li><span class="dot dot-cap"></span>Agents</li>
+      </ul>
+    </div>
+    <div class="pipe-link" aria-hidden="true"><span></span>&#9654;</div>
+    <div class="pipe-stage pipe-store">
+      <p class="pipe-head">Store</p>
+      <div class="pipe-box">
+        <span>DuckDB</span>
+        <span class="pipe-box-sep">/</span>
+        <span>Parquet</span>
+      </div>
+      <p class="pipe-note">on your machine</p>
+    </div>
+    <div class="pipe-link" aria-hidden="true"><span></span>&#9654;</div>
+    <div class="pipe-stage">
+      <p class="pipe-head">Understand</p>
+      <ul class="pipe-outs">
+        <li>CLI / TUI</li>
+        <li>Reports</li>
+        <li>MCP</li>
+        <li>API</li>
+      </ul>
+    </div>
   </div>
-  <div class="terminal" id="terminal" data-active="pkg">
-    <div class="terminal-bar"><span></span>~/work</div>
-    <pre class="terminal-body" id="terminal-body" aria-live="polite"></pre>
-  </div>
+  <p class="how-tenets">Local-first <span class="sep">·</span> Open source <span class="sep">·</span> Self-hostable</p>
 </section>
 
-<section class="caps" id="capabilities">
-  <h2 class="section-title">What each instrument measures</h2>
+<!-- 07 SIGNAL COVERAGE -->
+<section class="caps" id="coverage">
+  <p class="section-eyebrow">Signal coverage</p>
+  <h2 class="section-title">Product signals, from ecosystem to execution.</h2>
   <div class="caps-grid">
     <div class="caps-col">
-      <p class="product-label c-pkg">■ Package analytics</p>
+      <p class="product-label c-pkg">■ Ecosystem signals</p>
       <ul class="ticks ticks-pkg">
-        <li>Adoption trend: 30d / 90d / 1y, period over period</li>
-        <li>Health score 0–100, graded A–F: maintenance, community,
-            documentation, releases, security, testing</li>
-        <li>Dependents and reverse-dependency growth</li>
-        <li>Version adoption across recent releases</li>
-        <li>Ecosystem distribution across registries</li>
-        <li>OSV security advisories</li>
-        <li>Health timeline from local snapshots</li>
+        <li>Package adoption</li>
+        <li>Downloads</li>
+        <li>Dependencies</li>
+        <li>Releases</li>
+        <li>GitHub activity</li>
+        <li>Security</li>
       </ul>
     </div>
     <div class="caps-col">
-      <p class="product-label c-cli">■ CLI analytics</p>
+      <p class="product-label c-cli">■ Product usage signals</p>
       <ul class="ticks ticks-cli">
-        <li>Command and flag usage: names, never values</li>
-        <li>Failures by error class, per command</li>
-        <li>Durations: average and p95 per command</li>
-        <li>Version adoption of your own CLI</li>
-        <li>Usage trends over any window</li>
-        <li>Human vs. agent attribution, CI vs. interactive</li>
-        <li>Local DuckDB + Parquet store you fully own</li>
+        <li>CLI usage</li>
+        <li>SDK usage</li>
+        <li>Version adoption</li>
+        <li>Errors</li>
+        <li>Performance</li>
+        <li>Human vs. agent</li>
       </ul>
     </div>
     <div class="caps-col">
-      <p class="product-label c-cap">■ Agent Capability Analytics <span class="tag-planned">Planned</span></p>
+      <p class="product-label c-cap">■ Agent signals <span class="tag-planned">Planned</span></p>
       <ul class="ticks ticks-cap">
-        <li>Invocation count and success rate, per capability</li>
-        <li>Average latency, per capability</li>
-        <li>Unused capabilities flagged automatically</li>
-        <li>Human vs. agent origin, same schema as CLI analytics</li>
-        <li>One engine, shared with CLI analytics</li>
+        <li>Capability usage</li>
+        <li>Tool / MCP calls</li>
+        <li>Context</li>
+        <li>Execution</li>
+        <li>Outcomes</li>
+        <li>Latency</li>
       </ul>
     </div>
   </div>
 </section>
 
+<!-- 08 CTA -->
 <section class="strip">
   <p class="strip-lead">Built in the open, from the first commit.</p>
-  <p class="strip-sub">Try it, or open the first issue.</p>
+  <p class="strip-sub">Run Secchi locally, explore the source, or help shape what comes next.</p>
+  <div class="strip-cta">
+    <a class="btn btn-solid" href="https://docs.secchi.dev/getting-started/">Get started</a>
+    <a class="btn" href="https://github.com/kannandreams/secchi">View on GitHub</a>
+  </div>
 </section>
 
 </main>

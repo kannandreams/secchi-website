@@ -1,6 +1,6 @@
 // Real command output, captured by running the actual tools on
 // 2026-08-14. Do not invent or edit numbers here — re-capture instead:
-//   package intelligence: `uv run secchi show duckdb` in the secchi repo
+//   package signals: `uv run secchi show duckdb` in the secchi repo
 //   cli analytics: run `secchi-analytics` a few times, then
 //   `secchi-analytics stats --since 7d` and `secchi-analytics tail -n 6`
 // (the analytics capture is the tool recording its own invocations).

@@ -1,7 +1,7 @@
 # secchi-website
 
-The landing page for [secchi.dev](https://secchi.dev) — the Secchi
-developer tool intelligence family. Product documentation does not live
+The landing page for [secchi.dev](https://secchi.dev) — Secchi, the
+product signals platform for DevTools and agents. Product documentation does not live
 here; it stays in the [secchi](https://github.com/kannandreams/secchi)
 repository and is published at docs.secchi.dev.
 
@@ -14,21 +14,22 @@ Deploy workflow publishes the repository root to GitHub Pages as-is.
 ```
 index.html          the page
 css/site.css        all styles; design tokens at the top
-js/main.js          depth gauge + demo terminal (vanilla JS)
-data/demo.js        captured real command output for the demo
+js/main.js          depth gauge, Solutions menu, per-row demo terminals (vanilla JS)
+data/demo.js        captured real command output for the demo terminals
 fonts/              Space Grotesk (titles), JetBrains Mono (everything else)
 assets/             logo, dashboard screenshot
 <page>/index.html   redirect stubs for pre-split secchi.dev/<page> URLs
 ```
 
 Design rules, enforced by the tokens in `css/site.css`: black and white
-base; acid green `#7CFFB2` marks Package Intelligence, amber `#FFB000`
-marks CLI Analytics (a nod to green- and amber-phosphor terminal
-monitors), electric blue `#22D3EE` marks interaction
-(links, buttons, focus) — each color has exactly one job. No rounded
+base; acid green `#7CFFB2` marks ecosystem / package signals, amber
+`#FFB000` marks product usage signals (a nod to green- and amber-phosphor
+terminal monitors), violet `#C084FC` marks agent signals, electric blue
+`#22D3EE` marks interaction (links, buttons, focus) — each color has
+exactly one job. No rounded
 corners. All motion is disabled under `prefers-reduced-motion`.
 
-The demo terminal shows real captured output only. To refresh it, run the
+The demo terminals show real captured output only. To refresh it, run the
 actual tools and paste their output into `data/demo.js`; the capture
 recipe is in that file's header comment. Do not edit numbers by hand.
 
