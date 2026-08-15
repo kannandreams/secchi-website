@@ -2,7 +2,7 @@
    Design system: black & white base, three-color functional code.
    Each color has exactly one job and never trades jobs:
      --pkg  #7CFFB2  Package Intelligence (and nothing else)
-     --cli  #FF4D00  CLI Analytics        (and nothing else)
+     --cli  #FFB000  CLI Analytics        (and nothing else)
      --act  #22D3EE  interaction: links, buttons, focus (and nothing else)
    No rounded corners anywhere. Titles: Space Grotesk. Everything else:
    JetBrains Mono. */
@@ -39,7 +39,7 @@
   --muted: #9a9a9a;
   --line: #2a2a2a;
   --pkg: #7CFFB2;
-  --cli: #FF4D00;
+  --cli: #FFB000;
   --act: #22D3EE;
   --rail: 64px;          /* depth-gauge width on desktop */
   --measure: 72rem;
@@ -200,7 +200,7 @@ code { font-family: inherit; }
 .btn-solid:hover { background: transparent; color: var(--act); }
 
 /* ---- Two-product split ---- */
-/* Full-bleed by design: the green/orange top border is a section-break
+/* Full-bleed by design: the green/amber top border is a section-break
    accent and should reach the screen edge, not stop at the reading
    width. Paragraph text inside stays comfortably narrow via its own
    max-width (see .product p below), independent of the column width. */

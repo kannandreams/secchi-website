@@ -22,8 +22,9 @@ assets/             logo, dashboard screenshot
 ```
 
 Design rules, enforced by the tokens in `css/site.css`: black and white
-base; acid green `#7CFFB2` marks Package Intelligence, signal orange
-`#FF4D00` marks CLI Analytics, electric blue `#22D3EE` marks interaction
+base; acid green `#7CFFB2` marks Package Intelligence, amber `#FFB000`
+marks CLI Analytics (a nod to green- and amber-phosphor terminal
+monitors), electric blue `#22D3EE` marks interaction
 (links, buttons, focus) — each color has exactly one job. No rounded
 corners. All motion is disabled under `prefers-reduced-motion`.
 
