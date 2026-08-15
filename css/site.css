@@ -271,7 +271,7 @@ ul { list-style: none; }
 .hero-tenets {
   margin-top: 28px;
   font-size: 13px;
-  color: var(--muted);
+  color: var(--fg);
   letter-spacing: 0.06em;
 }
 .hero-tenets span { white-space: nowrap; }
