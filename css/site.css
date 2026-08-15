@@ -272,64 +272,53 @@ ul { list-style: none; }
 .section-title { font-size: 30px; font-weight: 700; margin-bottom: 18px; }
 .section-sub { color: var(--muted); max-width: 62ch; margin-bottom: 36px; }
 
-/* ---- 02 Platform idea: three signal families sink into one disk ---- */
+/* ---- 02 Platform idea: three signal families as depth strata ---- */
+/* Read top-down like water depth: ecosystem at the surface, agent
+   execution deepest, the disk sinking through into Secchi. Bands are
+   separated by the same wave that divides the product rows; no boxes,
+   no straight rules. Only the label carries the family color. */
 .platform {
   border-top: 1px solid var(--line);
   padding: 72px 32px 80px;
   max-width: var(--measure);
 }
 .flow { max-width: 56rem; }
-.flow-cols {
+.stratum {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 19ch 1fr;
   gap: 24px;
+  align-items: baseline;
+  padding: 16px 0;
 }
-.flow-col {
-  padding: 18px 20px 20px;
-  border: 1px solid var(--line);
-  background: var(--panel);
-  text-align: center;
+.stratum + .stratum {
+  position: relative;
+  padding-top: 32px;
 }
-.flow-col-pkg { border-top: 3px solid var(--pkg); }
-.flow-col-cli { border-top: 3px solid var(--cli); }
-.flow-col-cap { border-top: 3px solid var(--cap); }
-.flow-head {
-  font-size: 12px;
-  letter-spacing: 0.14em;
+.stratum + .stratum::before {
+  content: "";
+  position: absolute;
+  top: 8px; left: 0; right: 0;
+  height: 8px;
+  background: url(/assets/wave.svg) repeat-x left center;
+}
+.stratum-label {
+  font-size: 13px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  margin-bottom: 12px;
 }
-.flow-col li { color: var(--muted); font-size: 14px; line-height: 1.9; }
-
-/* The bracket: one drop from each column, a bar joining them, a stem
-   and arrow to the disk. Pure CSS so it stays crisp at any width. */
-.flow-join { position: relative; }
-.flow-drops {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  height: 28px;
-}
-.flow-drops i { display: block; width: 1px; height: 100%; margin: 0 auto; background: var(--line); }
-.flow-drops i:nth-child(1) { background: var(--pkg); }
-.flow-drops i:nth-child(2) { background: var(--cli); }
-.flow-drops i:nth-child(3) { background: var(--cap); }
-/* The bar runs from the centre of the first column to the centre of the
-   last: with three equal columns and 24px gaps that is one column-width
-   plus one gap in from each edge, halved. */
-.flow-bar {
-  height: 1px;
-  background: var(--line);
-  margin: 0 calc((100% - 48px) / 6 + 12px);
-}
-.flow-stem { width: 1px; height: 26px; margin: 0 auto; background: var(--line); }
-.flow-arrow {
-  text-align: center;
-  font-size: 10px;
+.stratum-items { color: var(--muted); font-size: 14px; }
+.stratum-items .sep { color: var(--muted); opacity: 0.55; margin: 0 6px; }
+.strata-drop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 8px;
   color: var(--muted);
+  font-size: 10px;
   line-height: 1;
-  margin-top: -3px;
 }
+.strata-drop i { display: block; width: 1px; height: 28px; background: var(--line); }
+.strata-drop span { margin-top: 2px; }
 .flow-sink {
   display: flex;
   align-items: center;
@@ -807,10 +796,7 @@ ul { list-style: none; }
   .footer::before { left: 20px; right: 20px; }
   .modal-overlay { padding: 16px; }
   .modal-close { top: 16px; right: 16px; }
-  .flow-cols, .flow-drops { gap: 12px; }
-  .flow-col { padding: 14px 8px 16px; }
-  .flow-col li { font-size: 12.5px; }
-  .flow-bar { margin: 0 calc((100% - 24px) / 6 + 6px); }
+  .stratum { grid-template-columns: 1fr; gap: 6px; }
   .subareas { gap: 12px; }
   .pipe { grid-template-columns: 1fr; gap: 12px; }
   .pipe-link { justify-content: center; transform: rotate(90deg); height: 20px; }
