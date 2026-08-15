@@ -18,7 +18,7 @@ js/main.js          depth gauge, Solutions menu, per-row demo terminals (vanilla
 data/demo.js        captured real command output for the demo terminals
 fonts/              Space Grotesk (titles), JetBrains Mono (everything else;
                     *-symbols.woff2 = box-drawing/arrows/shapes subsets)
-assets/             logo, dashboard screenshot
+assets/             logo, dashboard screenshot, secchi-og.png (social share image)
 <page>/index.html   redirect stubs for pre-split secchi.dev/<page> URLs
 ```
 
