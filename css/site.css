@@ -347,7 +347,7 @@ ul { list-style: none; }
 .stratum-learn { color: var(--muted); font-size: 13px; margin-top: 2px; }
 .stratum-learn .arrow { margin-right: 4px; }
 .stratum-items .sep, .stratum-learn .sep { color: var(--muted); opacity: 0.55; margin: 0 6px; }
-.flow-sink-wrap { display: flex; align-items: center; gap: 12px; }
+.flow-sink-wrap { display: flex; align-items: center; gap: 12px; align-self: stretch; }
 .flow-link { display: flex; align-items: center; gap: 4px; color: var(--fg); font-size: 10px; }
 .flow-link b { font-weight: 400; }
 .flow-link i { display: block; width: 32px; height: 1px; background: var(--fg); }
@@ -374,17 +374,23 @@ ul { list-style: none; }
 .sg-cli { stroke: var(--cli); }
 .sg-cap { stroke: var(--cap); }
 .signal-caption { margin-top: 8px; font-size: 10px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+/* SECCHI as a vertical layer: a full-height spine between the signal
+   families and what you get out of them. */
 .flow-sink {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
-  padding: 14px 28px;
+  justify-content: center;
+  align-self: stretch;
+  gap: 16px;
+  padding: 22px 14px;
   border: 1px solid var(--fg);
   font-family: "Space Grotesk", sans-serif;
   font-weight: 700;
   font-size: 18px;
   letter-spacing: 0.14em;
 }
+.flow-sink-name { writing-mode: vertical-rl; }
 
 /* ---- 03–05 Instrument rows ---- */
 /* Full-bleed by design: each row's wave is a section-break accent and
@@ -841,7 +847,9 @@ ul { list-style: none; }
   .modal-overlay { padding: 16px; }
   .modal-close { top: 16px; right: 16px; }
   .platform-grid { grid-template-columns: 1fr; gap: 12px; }
-  .flow-sink-wrap { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .flow-sink-wrap { flex-direction: column; align-items: flex-start; gap: 8px; align-self: auto; }
+  .flow-sink { flex-direction: row; align-self: auto; padding: 14px 28px; gap: 12px; }
+  .flow-sink-name { writing-mode: horizontal-tb; }
   .flow-link { flex-direction: column; margin-left: 20px; }
   .flow-link i { width: 1px; height: 28px; }
   .flow-link b { display: inline-block; transform: rotate(90deg); font-weight: 400; }
