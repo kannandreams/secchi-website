@@ -329,14 +329,6 @@ code { font-family: inherit; }
 }
 .roadmap-note::before { content: "\2192  "; color: var(--cli); }
 
-.demo-note {
-  margin-top: 20px;
-  font-size: 13px;
-  color: var(--muted);
-  max-width: 62ch;
-}
-.demo-note code { color: var(--fg); }
-
 /* ---- Demo terminal ---- */
 .demo {
   border-top: 1px solid var(--line);
