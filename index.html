@@ -122,22 +122,22 @@
           <button class="tab tab-cli is-active" role="tab" aria-selected="true" data-cmd-tab="clap">clap, Rust</button>
           <button class="tab tab-cli" role="tab" aria-selected="false" data-cmd-tab="click">click, Python</button>
         </div>
-        <pre class="code-block"><code data-cmd-panel="clap">let analytics = Analytics::builder("myctl")
-    .cli_version(env!("CARGO_PKG_VERSION"))
-    .allow_values(["format"])
-    .start();
+        <pre class="code-block"><code data-cmd-panel="clap"><span class="tok-k">let</span> analytics = <span class="tok-t">Analytics</span>::<span class="tok-f">builder</span>(<span class="tok-s">"myctl"</span>)
+    .<span class="tok-f">cli_version</span>(<span class="tok-f">env!</span>(<span class="tok-s">"CARGO_PKG_VERSION"</span>))
+    .<span class="tok-f">allow_values</span>([<span class="tok-s">"format"</span>])
+    .<span class="tok-f">start</span>();
 
-let matches = cli::build().get_matches();
-let outcome = run(&amp;matches);
+<span class="tok-k">let</span> matches = cli::<span class="tok-f">build</span>().<span class="tok-f">get_matches</span>();
+<span class="tok-k">let</span> outcome = <span class="tok-f">run</span>(&amp;matches);
 
-analytics.record_exit(&amp;matches, exit_code, error_class);</code><code data-cmd-panel="click" hidden>import click
-from secchi_analytics.click import instrument
+analytics.<span class="tok-f">record_exit</span>(&amp;matches, exit_code, error_class);</code><code data-cmd-panel="click" hidden><span class="tok-k">import</span> click
+<span class="tok-k">from</span> secchi_analytics.click <span class="tok-k">import</span> instrument
 
-@click.group()
-def cli():
+<span class="tok-d">@click.group()</span>
+<span class="tok-k">def</span> <span class="tok-f">cli</span>():
     ...
 
-instrument(cli, app_name="myctl")</code></pre>
+<span class="tok-f">instrument</span>(cli, app_name=<span class="tok-s">"myctl"</span>)</code></pre>
         <p class="code-caption" data-cmd-caption="clap">Real integration code, from <code>secchi-analytics-clap</code>. Shipped today.</p>
         <p class="code-caption" data-cmd-caption="click" hidden>The planned Click adapter's API. Not shipped yet.</p>
       </div>
@@ -246,12 +246,7 @@ docs-search-v1</pre>
 
 <section class="strip">
   <p class="strip-lead">Built in the open, from the first commit.</p>
-  <p class="strip-sub">No customer logos yet. The repos are public and the
-  roadmap is too. Read the code, try it, or open the first issue.</p>
-  <div class="strip-cta">
-    <a class="btn" href="https://github.com/kannandreams/secchi">secchi</a>
-    <a class="btn" href="https://github.com/kannandreams/secchi-cli-analytics">secchi-cli-analytics</a>
-  </div>
+  <p class="strip-sub">Try it, or open the first issue.</p>
 </section>
 
 </main>

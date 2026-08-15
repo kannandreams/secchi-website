@@ -208,17 +208,16 @@ code { font-family: inherit; }
    max-width, independent of row width. Each instrument is a full-width
    row (text column + visual column) rather than a side-by-side card, so
    three products don't cramp into narrow columns. */
-.instruments { border-top: 1px solid var(--line); }
 /* Section divider: a muted repeating wave (water surface, per the Secchi
-   name) instead of a bold product-color bar. Product color identity
-   stays in the labels, tabs, and tick markers within each row. */
+   name) is the only separator between rows — no straight rule doubling
+   it. Product color identity stays in the labels, tabs, and tick markers
+   within each row. */
 .instrument {
   position: relative;
   display: grid;
   grid-template-columns: 0.95fr 1.05fr;
   gap: 48px;
   padding: 64px 32px 56px;
-  border-bottom: 1px solid var(--line);
   background: var(--bg);
 }
 .instrument::before {
@@ -339,6 +338,18 @@ code { font-family: inherit; }
 .code-caption { font-size: 12px; color: var(--muted); margin-top: 10px; }
 .code-caption[hidden] { display: none; }
 .code-caption code { color: var(--fg); }
+
+/* Syntax tokens, hand-marked in the HTML (no highlight library). The
+   palette deliberately reuses the site's four inks rather than importing
+   a foreign scheme: violet keywords/decorators, green strings, amber
+   functions/types, muted defaults. Base code text dims slightly so the
+   tokens carry the structure. */
+.code-block { color: #c9c9c9; }
+.tok-k { color: var(--cap); }
+.tok-d { color: var(--cap); }
+.tok-s { color: var(--pkg); }
+.tok-f { color: var(--cli); }
+.tok-t { color: var(--cli); font-weight: 700; }
 
 /* Square-marked lists; marker color = product color. */
 .ticks { list-style: none; }
@@ -464,13 +475,6 @@ code { font-family: inherit; }
   font-size: 14px;
   max-width: 52ch;
   margin: 16px auto 0;
-}
-.strip-cta {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-top: 28px;
 }
 
 /* ---- Footer ---- */
