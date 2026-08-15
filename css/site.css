@@ -632,7 +632,7 @@ ul { list-style: none; }
   text-transform: uppercase;
   margin-bottom: 12px;
 }
-.pipe-sources li, .pipe-outs li {
+.pipe-sources li {
   color: var(--muted);
   font-size: 14px;
   line-height: 1.9;
@@ -644,7 +644,25 @@ ul { list-style: none; }
 .dot-pkg { background: var(--pkg); }
 .dot-cli { background: var(--cli); }
 .dot-cap { background: var(--cap); }
-.pipe-outs li::before { content: "\2192"; color: var(--muted); }
+/* Mini dashboard in the Understand stage: real duckdb numbers. */
+.dash {
+  border: 1px solid var(--line);
+  padding: 12px 14px 10px;
+  font-size: 12.5px;
+}
+.dash-title { font-weight: 700; margin-bottom: 8px; }
+.dash-row {
+  display: grid;
+  grid-template-columns: 10ch 1fr auto;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  line-height: 1.9;
+}
+.dash-row .dash-v { grid-column: 3; color: var(--fg); }
+.dash-bar { display: block; height: 6px; background: var(--line); }
+.dash-bar i { display: block; height: 100%; background: var(--fg); }
+.dash-up { color: var(--fg); }
 .pipe-link {
   display: flex;
   align-items: center;
@@ -668,7 +686,7 @@ ul { list-style: none; }
   letter-spacing: 0.04em;
 }
 .pipe-box-sep { color: var(--muted); font-weight: 500; }
-.pipe-note { margin-top: 10px; font-size: 12px; color: var(--muted); }
+.pipe-note { margin-top: 10px; font-size: 12px; color: var(--muted); line-height: 1.6; }
 .how-tenets {
   margin-top: 36px;
   font-size: 14px;

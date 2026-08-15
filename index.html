@@ -278,7 +278,6 @@ docs-search-v1</pre>
 
 <!-- 06 HOW SECCHI WORKS -->
 <section class="how" id="how">
-  <p class="section-eyebrow">How Secchi works</p>
   <h2 class="section-title">From signals to answers.</h2>
   <div class="pipe" aria-label="Collect, store, understand">
     <div class="pipe-stage">
@@ -304,12 +303,29 @@ docs-search-v1</pre>
     <div class="pipe-link" aria-hidden="true"><span></span>&#9654;</div>
     <div class="pipe-stage">
       <p class="pipe-head">Understand</p>
-      <ul class="pipe-outs">
-        <li>CLI / TUI</li>
-        <li>Reports</li>
-        <li>MCP</li>
-        <li>API</li>
-      </ul>
+      <!-- Mini dashboard: the real numbers from `secchi show duckdb`
+           (see data/demo.js), not invented ones. -->
+      <div class="dash" aria-label="Example dashboard for duckdb">
+        <p class="dash-title">duckdb</p>
+        <div class="dash-row">
+          <span class="dash-k">Health</span>
+          <span class="dash-bar"><i style="width:89%"></i></span>
+          <span class="dash-v">89</span>
+        </div>
+        <div class="dash-row">
+          <span class="dash-k">Downloads</span>
+          <span class="dash-v dash-up">&#9650; 19.1%</span>
+        </div>
+        <div class="dash-row">
+          <span class="dash-k">Stars</span>
+          <span class="dash-v">177</span>
+        </div>
+        <div class="dash-row">
+          <span class="dash-k">Advisories</span>
+          <span class="dash-v">0</span>
+        </div>
+      </div>
+      <p class="pipe-note">Read it in the CLI or TUI, in reports, over MCP, or through the API.</p>
     </div>
   </div>
   <p class="how-tenets">Local-first <span class="sep">·</span> Open source <span class="sep">·</span> Self-hostable</p>
