@@ -20,6 +20,9 @@ fonts/              Space Grotesk (titles), JetBrains Mono (everything else;
                     *-symbols.woff2 = box-drawing/arrows/shapes subsets)
 assets/             logo, dashboard screenshot, secchi-og.png (social share image)
 <page>/index.html   redirect stubs for pre-split secchi.dev/<page> URLs
+favicon.svg,        favicon set: SVG (modern browsers) + ICO/PNG
+favicon*.png/.ico,  fallbacks (older Safari, search results, iOS/Android
+site.webmanifest    home-screen icons), generated from favicon.svg
 ```
 
 Design rules, enforced by the tokens in `css/site.css`: black and white
