@@ -188,9 +188,12 @@ code { font-family: inherit; }
   display: inline-block;
   padding: 14px 26px;
   border: 1px solid var(--act);
+  background: transparent;
   color: var(--act);
+  font-family: inherit;
   font-size: 14px;
   font-weight: 500;
+  cursor: pointer;
 }
 .btn:hover { text-decoration: none; background: var(--act); color: var(--bg); }
 .btn-solid { background: var(--act); color: var(--bg); }
