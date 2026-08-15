@@ -38,14 +38,10 @@
 <main>
 
 <section class="hero">
-  <p class="eyebrow">A Secchi disk measures how deep you can see into water.
-  Secchi measures how deep you can see into your tools.</p>
   <h1>Developer<br>Tool<br>Intelligence</h1>
-  <p class="hero-sub">Three instruments, one lens:
-    <strong class="c-pkg">package intelligence</strong> for the dependencies
-    you choose, <strong class="c-cli">CLI analytics</strong> for the
-    command-line tools you ship, and <strong class="c-cap">capability
-    intelligence</strong> for what your agents actually call.</p>
+  <p class="hero-sub"><strong class="c-pkg">Package intelligence</strong>,
+    <strong class="c-cli">CLI analytics</strong>,
+    <strong class="c-cap">Agent capability intelligence</strong>. One lens.</p>
   <div class="hero-cta">
     <a class="btn btn-solid" href="https://docs.secchi.dev/getting-started/">Read the docs</a>
     <a class="btn" href="https://github.com/kannandreams/secchi">View on GitHub</a>
@@ -62,6 +58,12 @@
       a single health picture, across PyPI, npm, crates.io, Homebrew, Go,
       and CRAN. In the terminal, in reports, or over MCP for coding
       agents.</p>
+      <button type="button" class="btn btn-view" data-modal-src="/assets/secchi-dashboard-preview.png"
+              data-modal-alt="The Secchi terminal dashboard showing adoption, health score, and version metrics for a package">
+        &#9654; Live Demo
+      </button>
+    </div>
+    <div class="instrument-visual">
       <ul class="ecosystems" aria-label="Supported package registries">
         <li><span class="ico ico-pypi" aria-hidden="true"></span>PyPI</li>
         <li><span class="ico ico-npm" aria-hidden="true"></span>npm</li>
@@ -82,13 +84,11 @@
           <div class="install-line" data-cmd-panel="pip" hidden><span class="prompt">$ </span><code>pip install secchi</code></div>
         </div>
       </div>
-    </div>
-    <div class="instrument-visual">
-      <button type="button" class="btn btn-view" data-modal-src="/assets/secchi-dashboard-preview.png"
-              data-modal-alt="The Secchi terminal dashboard showing adoption, health score, and version metrics for a package">
-        &#9654; View the live dashboard
-      </button>
-      <p class="visual-caption">Real output: <code>secchi dashboard duckdb</code></p>
+      <ul class="ticks ticks-pkg mini-ticks">
+        <li>Health score 0–100, graded A–F</li>
+        <li>Adoption trend across 30d / 90d / 1y</li>
+        <li>Security advisories surfaced automatically</li>
+      </ul>
     </div>
   </div>
 
@@ -104,6 +104,9 @@
       values you typed, never error messages. If a captured value happens
       to look like a secret, an API key, a token, an email, it's redacted
       before it's ever written to disk.</p>
+      <a class="btn btn-view" href="#demo" data-select-demo="cli">&#9654; Live Demo</a>
+    </div>
+    <div class="instrument-visual">
       <div class="cmd" data-cmd-group>
         <div class="tabs tabs-sm" role="tablist" aria-label="Install secchi-cli-analytics">
           <button class="tab tab-cli is-active" role="tab" aria-selected="true" data-cmd-tab="cargo">cargo</button>
@@ -136,7 +139,7 @@ instrument(cli, app_name="myctl")</code></pre>
         <p class="code-caption" data-cmd-caption="clap">Real integration code, from <code>secchi-analytics-clap</code>. Shipped today.</p>
         <p class="code-caption" data-cmd-caption="click" hidden>The planned Click adapter's API. Not shipped yet.</p>
       </div>
-      <ul class="ticks">
+      <ul class="ticks mini-ticks">
         <li>Local-first: useful with zero network, zero account</li>
         <li>Redaction runs even on values you explicitly allow through</li>
         <li>Off with one switch: <code>SECCHI_ANALYTICS=0</code></li>
@@ -144,15 +147,11 @@ instrument(cli, app_name="myctl")</code></pre>
       </ul>
       <p class="roadmap-note">A local TUI dashboard for this data ships next.</p>
     </div>
-    <div class="instrument-visual">
-      <a class="btn btn-view" href="#demo" data-select-demo="cli">&#9654; See it in your terminal</a>
-      <p class="visual-caption">Real captured output, live below.</p>
-    </div>
   </div>
 
   <div class="instrument instrument-cap instrument-planned">
     <div class="instrument-text">
-      <p class="product-label c-cap">■ Capability intelligence <span class="tag-planned">Planned</span></p>
+      <p class="product-label c-cap">■ Agent Capability Intelligence <span class="tag-planned">Planned</span></p>
       <h2>Is your agent's toolset earning its keep?</h2>
       <p>Agents call MCP servers, skills, and tools you often didn't build
       yourself. The same discipline CLI analytics applies to commands,
@@ -177,6 +176,11 @@ jira-mcp
 legacy-db-skill
 docs-search-v1</pre>
       <p class="visual-caption">A concept sketch, not captured output. Ships on the same engine as CLI analytics.</p>
+      <ul class="ticks ticks-cap mini-ticks">
+        <li>Invocation count and success rate, per capability</li>
+        <li>Unused capabilities flagged automatically</li>
+        <li>Same engine, same privacy rules as CLI analytics</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -226,7 +230,7 @@ docs-search-v1</pre>
       </ul>
     </div>
     <div class="caps-col">
-      <p class="product-label c-cap">■ Capability intelligence <span class="tag-planned">Planned</span></p>
+      <p class="product-label c-cap">■ Agent Capability Intelligence <span class="tag-planned">Planned</span></p>
       <ul class="ticks ticks-cap">
         <li>Invocation count and success rate, per capability</li>
         <li>Average latency, per capability</li>
@@ -239,9 +243,13 @@ docs-search-v1</pre>
 </section>
 
 <section class="strip">
-  <p><span class="c-pkg">secchi</span> tells you what to depend on.
-     <span class="c-cli">secchi-analytics</span> tells you what your users
-     depend on. Both from your terminal, both under your control.</p>
+  <p class="strip-lead">Built in the open, from the first commit.</p>
+  <p class="strip-sub">No customer logos yet. The repos are public and the
+  roadmap is too. Read the code, try it, or open the first issue.</p>
+  <div class="strip-cta">
+    <a class="btn" href="https://github.com/kannandreams/secchi">secchi</a>
+    <a class="btn" href="https://github.com/kannandreams/secchi-cli-analytics">secchi-cli-analytics</a>
+  </div>
 </section>
 
 </main>
