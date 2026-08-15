@@ -726,13 +726,23 @@ ul { list-style: none; }
 }
 
 /* ---- Footer ---- */
+/* Divider: a diagonal hatch (////), the surface-side sibling of the wave
+   that separates the product rows. Same muted stroke, same inset, and
+   no straight rule doubling it. */
 .footer {
-  border-top: 1px solid var(--line);
+  position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 32px;
-  padding: 48px 32px 64px;
+  padding: 56px 32px 64px;
   font-size: 13px;
+}
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 14px; left: 32px; right: 32px;
+  height: 8px;
+  background: url(/assets/hatch.svg) repeat-x left center;
 }
 .footer-col { display: flex; flex-direction: column; gap: 10px; }
 .footer-head {
@@ -793,7 +803,8 @@ ul { list-style: none; }
   .hero, .platform, .how, .caps, .strip { padding-left: 20px; padding-right: 20px; }
   .instrument { padding: 40px 20px 48px; gap: 36px; }
   .instrument-visual { min-width: 0; }
-  .footer { padding: 40px 20px 56px; }
+  .footer { padding: 48px 20px 56px; }
+  .footer::before { left: 20px; right: 20px; }
   .modal-overlay { padding: 16px; }
   .modal-close { top: 16px; right: 16px; }
   .flow-cols, .flow-drops { gap: 12px; }
