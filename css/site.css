@@ -275,7 +275,13 @@ ul { list-style: none; }
   letter-spacing: 0.06em;
 }
 .hero-tenets span { white-space: nowrap; }
-.hero-tenets .sep { color: var(--muted); opacity: 0.55; margin: 0 10px; }
+.hero-tenets .sep {
+  display: inline-block;
+  width: 5px; height: 5px;
+  background: var(--fg);
+  vertical-align: middle;
+  margin: 0 12px;
+}
 
 .btn {
   display: inline-block;
