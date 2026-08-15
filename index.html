@@ -382,66 +382,110 @@ docs-search-v1</pre>
 <!-- 06 HOW SECCHI WORKS -->
 <section class="how" id="how">
   <h2 class="section-title">From signals to answers.</h2>
-  <!-- Fan-in / fan-out as inline SVG (crisp lines, site palette, labels
-       in the site font). A stacked HTML variant takes over on narrow
-       screens where the wide diagram can't fit. -->
-  <div class="diagram-scroll">
-  <svg class="diagram diagram-wide" viewBox="0 0 720 260" role="img" aria-label="Registries, GitHub, CLI, SDK and Agents fan in to Product Signals, which fan out to the CLI and TUI, reports, CI/CD, MCP and API; persisted to DuckDB or Parquet when needed">
-    <text class="dg-h" x="0" y="16">COLLECT</text>
-    <text class="dg-h" x="340" y="16" text-anchor="middle">ANALYZE</text>
-    <text class="dg-h" x="600" y="16">USE</text>
-    <g class="dg-c" shape-rendering="crispEdges">
-      <line x1="110" y1="56" x2="170" y2="56"/>
-      <line x1="560" y1="56" x2="592" y2="56"/>
-      <line x1="110" y1="84" x2="170" y2="84"/>
-      <line x1="560" y1="84" x2="592" y2="84"/>
-      <line x1="110" y1="112" x2="170" y2="112"/>
-      <line x1="560" y1="112" x2="592" y2="112"/>
-      <line x1="110" y1="140" x2="170" y2="140"/>
-      <line x1="560" y1="140" x2="592" y2="140"/>
-      <line x1="110" y1="168" x2="170" y2="168"/>
-      <line x1="560" y1="168" x2="592" y2="168"/>
-      <line x1="170" y1="56" x2="170" y2="168"/>
-      <line x1="560" y1="56" x2="560" y2="168"/>
-      <line x1="170" y1="112" x2="244" y2="112"/>
-      <line x1="430" y1="112" x2="560" y2="112"/>
-      <line x1="340" y1="130" x2="340" y2="194" stroke-dasharray="3 3"/>
-    </g>
-    <polygon class="dg-arrow" points="244,108 250,112 244,116"/>
-    <polygon class="dg-arrow" points="336,194 344,194 340,200"/>
-    <rect class="dg-pkg" x="0" y="48" width="8" height="8"/>
-    <text x="16" y="56">Registries</text>
-    <rect class="dg-pkg" x="0" y="76" width="8" height="8"/>
-    <text x="16" y="84">GitHub</text>
-    <rect class="dg-cli" x="0" y="104" width="8" height="8"/>
-    <text x="16" y="112">CLI</text>
-    <rect class="dg-cli" x="0" y="132" width="8" height="8"/>
-    <text x="16" y="140">SDK</text>
-    <rect class="dg-cap" x="0" y="160" width="8" height="8"/>
-    <text x="16" y="168">Agents</text>
-    <rect class="dg-node" x="250" y="94" width="180" height="36"/>
-    <text class="dg-b" x="340" y="117" text-anchor="middle">Product Signals</text>
-    <text x="600" y="56">CLI / TUI</text>
-    <text x="600" y="84">Reports</text>
-    <text x="600" y="112">CI/CD</text>
-    <text x="600" y="140">MCP</text>
-    <text x="600" y="168">API</text>
-    <text class="dg-b" x="340" y="223" text-anchor="middle">DuckDB / Parquet</text>
-    <text class="dg-n" x="340" y="243" text-anchor="middle">when persisted</text>
-  </svg>
+  <p class="section-sub">The same signals, wherever the decision happens: in
+  your terminal, in a report, on a pull request, inside a coding agent, or as
+  JSON for everything else.</p>
+
+  <!-- Every panel is a real artifact: the TUI screenshot, the generated
+       report from examples/reports/duckdb in the secchi repo, the action's
+       documented usage, the documented MCP config and tools, and the head
+       of the real JSON export. Nothing here is invented. -->
+  <div class="codewin answers" data-cmd-group>
+    <div class="codewin-bar">
+      <span class="codewin-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      <div class="wtabs" role="tablist" aria-label="Where the answers show up">
+        <button class="wtab is-active" role="tab" aria-selected="true" data-cmd-tab="tui">Terminal</button>
+        <button class="wtab" role="tab" aria-selected="false" data-cmd-tab="report">Report</button>
+        <button class="wtab" role="tab" aria-selected="false" data-cmd-tab="ci">Pull request</button>
+        <button class="wtab" role="tab" aria-selected="false" data-cmd-tab="mcp">MCP</button>
+        <button class="wtab" role="tab" aria-selected="false" data-cmd-tab="json">JSON</button>
+      </div>
+    </div>
+
+    <div class="answer" data-cmd-panel="tui">
+      <div class="answer-shot">
+        <p class="answer-cmd"><span class="prompt">$ </span>uvx --from secchi secchi dashboard duckdb</p>
+        <img src="/assets/secchi-dashboard-preview.png" width="1478" height="726"
+             alt="The Secchi terminal dashboard for duckdb: adoption, health score, and version metrics">
+      </div>
+      <p class="answer-caption">The local TUI. Health, adoption, versions, and security in one screen.</p>
+    </div>
+
+    <div class="answer" data-cmd-panel="report" hidden>
+      <pre class="code-block codewin-body"><span class="prompt">$ </span>secchi report duckdb --format md
+
+<span class="tok-t"># duckdb</span>
+Registry: pypi
+
+<span class="tok-t">## Overview</span>
+| Signal               | Value                          |
+| -------------------- | ------------------------------ |
+| Health score         | 89 / 100 (B)                   |
+| Latest version       | 1.5.5                          |
+| Downloads (30d)      | 54,469,976                     |
+| Adoption change      | +8.3% vs previous 30 days      |
+| GitHub stars         | 174                            |
+
+<span class="tok-t">## Health breakdown</span>
+| Category       | Score   |
+| -------------- | ------- |
+| Maintenance    | 20 / 20 |
+| Community      |  8 / 15 |
+| Documentation  | 11 / 15 |
+| Releases       | 15 / 15 |
+| Security       | 20 / 20 |
+| Testing        | 15 / 15 |</pre>
+      <p class="answer-caption">Markdown, HTML, or JSON. Drop it in a PR, a wiki, or a stakeholder deck.</p>
+    </div>
+
+    <div class="answer" data-cmd-panel="ci" hidden>
+      <pre class="code-block codewin-body"><span class="tok-d"># .github/workflows/secchi.yml</span>
+<span class="tok-k">on</span>: [<span class="tok-s">pull_request</span>]
+
+<span class="tok-k">jobs</span>:
+  <span class="tok-k">secchi</span>:
+    <span class="tok-k">runs-on</span>: <span class="tok-s">ubuntu-latest</span>
+    <span class="tok-k">steps</span>:
+      - <span class="tok-k">uses</span>: <span class="tok-s">actions/checkout@v6</span>
+      - <span class="tok-k">uses</span>: <span class="tok-s">kannandreams/secchi-action@v1</span>
+        <span class="tok-k">with</span>:
+          <span class="tok-k">package</span>: <span class="tok-s">pypi:duckdb</span></pre>
+      <p class="answer-caption">Writes the report to the job summary and keeps one PR comment updated across re-runs.</p>
+    </div>
+
+    <div class="answer" data-cmd-panel="mcp" hidden>
+      <pre class="code-block codewin-body"><span class="tok-d">// claude_desktop_config.json, .cursor/mcp.json, ...</span>
+{
+  <span class="tok-s">"mcpServers"</span>: {
+    <span class="tok-s">"secchi"</span>: { <span class="tok-s">"command"</span>: <span class="tok-s">"secchi-mcp"</span> }
+  }
+}
+
+<span class="tok-d">// tools</span>
+<span class="tok-f">inspect_package</span>    health, adoption, releases, dependencies, repo signals
+<span class="tok-f">search_packages</span>    ranked matches across supported ecosystems
+<span class="tok-f">inspect_project</span>    a configured project, sources combined
+<span class="tok-f">check_package</span>      health and repository CI policies
+<span class="tok-f">compare_packages</span>   rank choices with evidence and confidence</pre>
+      <p class="answer-caption">A read-only MCP server for coding agents. Same signals, inside the loop.</p>
+    </div>
+
+    <div class="answer" data-cmd-panel="json" hidden>
+      <pre class="code-block codewin-body"><span class="prompt">$ </span>secchi report duckdb --format json --output -
+{
+  <span class="tok-s">"schema"</span>: <span class="tok-s">"secchi.package-intelligence"</span>,
+  <span class="tok-s">"schema_version"</span>: 1,
+  <span class="tok-s">"package"</span>: <span class="tok-s">"duckdb"</span>,
+  <span class="tok-s">"registry"</span>: <span class="tok-s">"pypi"</span>,
+  <span class="tok-s">"package_info"</span>: {
+    <span class="tok-s">"latest_version"</span>: <span class="tok-s">"1.5.5"</span>,
+    <span class="tok-s">"download_counts"</span>: { <span class="tok-s">"today"</span>: 1394942, <span class="tok-s">"week"</span>: 13604705, <span class="tok-s">"month"</span>: 54469976 },
+    <span class="tok-s">"github_stats"</span>: { <span class="tok-s">"stars"</span>: 174, <span class="tok-s">"forks"</span>: 102, <span class="tok-s">"open_issues"</span>: 53 }
+  }
+}</pre>
+      <p class="answer-caption">Schema-versioned export for automation and agent workflows.</p>
+    </div>
   </div>
-  <div class="diagram diagram-narrow" aria-hidden="true">
-    <p class="dg-h">Collect</p>
-    <p class="dg-row"><span class="dg-item"><span class="dg-m dg-pkg">■</span> Registries</span> <span class="dg-c">·</span> <span class="dg-item"><span class="dg-m dg-pkg">■</span> GitHub</span> <span class="dg-c">·</span> <span class="dg-item"><span class="dg-m dg-cli">■</span> CLI</span> <span class="dg-c">·</span> <span class="dg-item"><span class="dg-m dg-cli">■</span> SDK</span> <span class="dg-c">·</span> <span class="dg-item"><span class="dg-m dg-cap">■</span> Agents</span></p>
-    <p class="dg-c dg-stem">│<br>▼</p>
-    <p class="dg-h">Analyze</p>
-    <p class="dg-row"><span class="dg-b">Product Signals</span></p>
-    <p class="dg-row dg-n">└─ DuckDB / Parquet, when persisted</p>
-    <p class="dg-c dg-stem">│<br>▼</p>
-    <p class="dg-h">Use</p>
-    <p class="dg-row">CLI / TUI <span class="dg-c">·</span> Reports <span class="dg-c">·</span> CI/CD <span class="dg-c">·</span> MCP <span class="dg-c">·</span> API</p>
-  </div>
-  <p class="how-tenets"><span>Local-first</span> <span class="sep">·</span> <span>Open source</span> <span class="sep">·</span> <span>Self-hostable</span></p>
 </section>
 
 <!-- 07 SIGNAL COVERAGE -->

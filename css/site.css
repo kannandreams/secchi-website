@@ -689,55 +689,23 @@ ul { list-style: none; }
   padding: 72px 32px 72px;
   max-width: var(--measure);
 }
-.diagram-scroll { overflow-x: auto; margin-top: 40px; }
-.diagram-wide {
-  display: block;
-  width: 100%;
-  max-width: 720px;
-  min-width: 600px;
-  height: auto;
-  overflow: visible;
-  font-size: 13px;
-}
-.diagram-wide text { font-family: inherit; fill: var(--muted); }
-.diagram-wide .dg-h { fill: var(--fg); font-size: 12px; letter-spacing: 0.12em; }
-.diagram-wide .dg-b { fill: var(--fg); font-weight: 700; }
-.diagram-wide .dg-n { font-size: 12px; }
-.diagram-wide .dg-c { stroke: #555; stroke-width: 1; fill: none; }
-.diagram-wide .dg-arrow { fill: #555; }
-.diagram-wide .dg-node { fill: none; stroke: var(--fg); stroke-width: 1; }
-.diagram-wide .dg-pkg { fill: var(--pkg); }
-.diagram-wide .dg-cli { fill: var(--cli); }
-.diagram-wide .dg-cap { fill: var(--cap); }
-
-/* Stacked variant for narrow screens. */
-.diagram-narrow {
-  display: none;
-  margin-top: 40px;
-  font-size: 13px;
-  line-height: 1.75;
+/* Answers window: one real artifact per output surface. Neutral active
+   tab (white), because this window spans all three families. */
+.answers { max-width: 64rem; margin-top: 8px; }
+.answers .wtabs { flex-wrap: wrap; }
+.answers .wtab.is-active { border-bottom-color: var(--fg); }
+.answers .answer[hidden] { display: none; }
+.answer-shot { padding: 16px 18px 18px; }
+.answer-cmd { font-size: 13px; }
+.answer-cmd .prompt { color: var(--muted); }
+.answer-shot img { display: block; width: 100%; height: auto; margin-top: 12px; border: 1px solid var(--line); }
+.answer-caption {
+  padding: 10px 18px 14px;
+  font-size: 12px;
   color: var(--muted);
+  border-top: 1px solid var(--line);
 }
-.diagram-narrow .dg-h { color: var(--fg); letter-spacing: 0.12em; }
-.diagram-narrow .dg-b { color: var(--fg); font-weight: 700; }
-.diagram-narrow .dg-c { color: #555; }
-.diagram-narrow .dg-n { font-size: 12px; }
-.diagram-narrow .dg-m { font-weight: 700; }
-.diagram-narrow .dg-pkg { color: var(--pkg); }
-.diagram-narrow .dg-cli { color: var(--cli); }
-.diagram-narrow .dg-cap { color: var(--cap); }
-.diagram-narrow .dg-h { margin-top: 4px; font-size: 12px; text-transform: uppercase; }
-.diagram-narrow .dg-item { white-space: nowrap; }
-.diagram-narrow .dg-row { color: var(--fg); }
-.diagram-narrow .dg-row.dg-n { color: var(--muted); padding-left: 1ch; }
-.diagram-narrow .dg-stem { line-height: 1.2; padding: 6px 0 6px 1ch; }
-.how-tenets {
-  margin-top: 36px;
-  font-size: 14px;
-  letter-spacing: 0.06em;
-}
-.how-tenets span { white-space: nowrap; }
-.how-tenets .sep { color: var(--muted); margin: 0 10px; }
+.answers .code-block .prompt { color: var(--muted); }
 
 /* ---- 07 Signal coverage ---- */
 .caps { border-top: 1px solid var(--line); padding: 72px 32px 64px; }
@@ -881,10 +849,4 @@ ul { list-style: none; }
   .flow-link b { display: inline-block; transform: rotate(90deg); font-weight: 400; }
   .signal-panel { width: 100%; max-width: 340px; }
   .subareas { gap: 12px; }
-}
-@media (max-width: 600px) {
-  .diagram-scroll { display: none; }
-  .diagram-narrow { display: block; }
-  .how-tenets { font-size: 13px; letter-spacing: 0.02em; }
-  .how-tenets .sep { margin: 0 6px; }
 }
