@@ -628,7 +628,7 @@ ul { list-style: none; }
   border-bottom: 1px solid var(--line);
 }
 .codewin-dots { display: flex; align-items: center; gap: 6px; }
-.codewin-dots i { display: block; width: 9px; height: 9px; background: var(--line); }
+.codewin-dots i { display: block; width: 9px; height: 9px; background: var(--muted); }
 .wtabs { display: flex; gap: 4px; }
 .wtab {
   font-family: inherit;
