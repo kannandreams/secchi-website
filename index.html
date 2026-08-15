@@ -279,56 +279,31 @@ docs-search-v1</pre>
 <!-- 06 HOW SECCHI WORKS -->
 <section class="how" id="how">
   <h2 class="section-title">From signals to answers.</h2>
-  <div class="pipe" aria-label="Collect, store, understand">
-    <div class="pipe-stage">
-      <p class="pipe-head">Collect</p>
-      <ul class="pipe-sources">
-        <li><span class="dot dot-pkg"></span>Registries</li>
-        <li><span class="dot dot-pkg"></span>GitHub</li>
-        <li><span class="dot dot-cli"></span>CLI</li>
-        <li><span class="dot dot-cli"></span>SDK</li>
-        <li><span class="dot dot-cap"></span>Agents</li>
-      </ul>
-    </div>
-    <div class="pipe-link" aria-hidden="true"><span></span>&#9654;</div>
-    <div class="pipe-stage pipe-store">
-      <p class="pipe-head">Store</p>
-      <div class="pipe-box">
-        <span>DuckDB</span>
-        <span class="pipe-box-sep">/</span>
-        <span>Parquet</span>
-      </div>
-      <p class="pipe-note">on your machine</p>
-    </div>
-    <div class="pipe-link" aria-hidden="true"><span></span>&#9654;</div>
-    <div class="pipe-stage">
-      <p class="pipe-head">Understand</p>
-      <!-- Mini dashboard: the real numbers from `secchi show duckdb`
-           (see data/demo.js), not invented ones. -->
-      <div class="dash" aria-label="Example dashboard for duckdb">
-        <p class="dash-title">duckdb</p>
-        <div class="dash-row">
-          <span class="dash-k">Health</span>
-          <span class="dash-bar"><i style="width:89%"></i></span>
-          <span class="dash-v">89</span>
-        </div>
-        <div class="dash-row">
-          <span class="dash-k">Downloads</span>
-          <span class="dash-v dash-up">&#9650; 19.1%</span>
-        </div>
-        <div class="dash-row">
-          <span class="dash-k">Stars</span>
-          <span class="dash-v">177</span>
-        </div>
-        <div class="dash-row">
-          <span class="dash-k">Advisories</span>
-          <span class="dash-v">0</span>
-        </div>
-      </div>
-      <p class="pipe-note">Read it in the CLI or TUI, in reports, over MCP, or through the API.</p>
-    </div>
+  <!-- Fan-in / fan-out, drawn in monospace like the rest of the site.
+       Wide diagram on desktop; a stacked variant takes over on narrow
+       screens where 66 columns can't fit. -->
+  <pre class="diagram diagram-wide" aria-label="Sources fan in to Product Signals, which fan out to the CLI, TUI, reports, CI/CD, MCP, and API; persisted to DuckDB or Parquet when needed"><span class="dg-h">COLLECT</span>               <span class="dg-h">ANALYZE</span>                         <span class="dg-h">USE</span>
+
+<span class="dg-m dg-pkg">■</span> Registries <span class="dg-c">─┐</span>                                       <span class="dg-c">┌─</span> CLI / TUI
+<span class="dg-m dg-pkg">■</span> GitHub <span class="dg-c">─────┤</span>                                       <span class="dg-c">├─</span> Reports
+<span class="dg-m dg-cli">■</span> CLI <span class="dg-c">────────┼</span><span class="dg-c">────►</span>  <span class="dg-b">Product Signals</span>  <span class="dg-c">───────────────</span><span class="dg-c">┼─</span> CI/CD
+<span class="dg-m dg-cli">■</span> SDK <span class="dg-c">────────┤</span>              <span class="dg-c">│</span>                        <span class="dg-c">├─</span> MCP
+<span class="dg-m dg-cap">■</span> Agents <span class="dg-c">─────┘</span>              <span class="dg-c">│</span>                        <span class="dg-c">└─</span> API
+                             <span class="dg-c">▼</span>
+                     <span class="dg-b">DuckDB / Parquet</span>
+                      <span class="dg-n">when persisted</span></pre>
+  <div class="diagram diagram-narrow" aria-hidden="true">
+    <p class="dg-h">Collect</p>
+    <p class="dg-row"><span class="dg-item"><span class="dg-m dg-pkg">■</span> Registries</span> <span class="dg-c">·</span> <span class="dg-item"><span class="dg-m dg-pkg">■</span> GitHub</span> <span class="dg-c">·</span> <span class="dg-item"><span class="dg-m dg-cli">■</span> CLI</span> <span class="dg-c">·</span> <span class="dg-item"><span class="dg-m dg-cli">■</span> SDK</span> <span class="dg-c">·</span> <span class="dg-item"><span class="dg-m dg-cap">■</span> Agents</span></p>
+    <p class="dg-c dg-stem">│<br>▼</p>
+    <p class="dg-h">Analyze</p>
+    <p class="dg-row"><span class="dg-b">Product Signals</span></p>
+    <p class="dg-row dg-n">└─ DuckDB / Parquet, when persisted</p>
+    <p class="dg-c dg-stem">│<br>▼</p>
+    <p class="dg-h">Use</p>
+    <p class="dg-row">CLI / TUI <span class="dg-c">·</span> Reports <span class="dg-c">·</span> CI/CD <span class="dg-c">·</span> MCP <span class="dg-c">·</span> API</p>
   </div>
-  <p class="how-tenets">Local-first <span class="sep">·</span> Open source <span class="sep">·</span> Self-hostable</p>
+  <p class="how-tenets"><span>Local-first</span> <span class="sep">·</span> <span>Open source</span> <span class="sep">·</span> <span>Self-hostable</span></p>
 </section>
 
 <!-- 07 SIGNAL COVERAGE -->

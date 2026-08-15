@@ -16,7 +16,8 @@ index.html          the page
 css/site.css        all styles; design tokens at the top
 js/main.js          depth gauge, Solutions menu, per-row demo terminals (vanilla JS)
 data/demo.js        captured real command output for the demo terminals
-fonts/              Space Grotesk (titles), JetBrains Mono (everything else)
+fonts/              Space Grotesk (titles), JetBrains Mono (everything else;
+                    *-symbols.woff2 = box-drawing/arrows/shapes subsets)
 assets/             logo, dashboard screenshot
 <page>/index.html   redirect stubs for pre-split secchi.dev/<page> URLs
 ```
