@@ -344,8 +344,10 @@ ul { list-style: none; }
   text-transform: uppercase;
   margin-bottom: 4px;
 }
-.stratum-items { color: var(--muted); font-size: 14px; }
-.stratum-items .sep { color: var(--muted); opacity: 0.55; margin: 0 6px; }
+.stratum-items { color: var(--fg); font-size: 14px; }
+.stratum-learn { color: var(--muted); font-size: 13px; margin-top: 2px; }
+.stratum-learn .arrow { margin-right: 4px; }
+.stratum-items .sep, .stratum-learn .sep { color: var(--muted); opacity: 0.55; margin: 0 6px; }
 .flow-sink-wrap { display: flex; align-items: center; gap: 12px; }
 .flow-link { display: flex; align-items: center; gap: 4px; color: var(--muted); font-size: 10px; }
 .flow-link b { font-weight: 400; }
