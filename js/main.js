@@ -206,17 +206,31 @@
     });
   });
 
-  /* ---- Screenshot modal: opens a full-size real asset only. No video or
-     placeholder is wired up until a real one exists to show. ---- */
+  /* ---- Preview modal. Three sources, all real: a screenshot asset
+     (data-modal-src), the captured demo output rendered in full
+     (data-modal-demo, independent of the row terminal's animation
+     state), or the text of an existing <pre> on the page
+     (data-modal-from, e.g. the agent concept sketch). ---- */
   var modalOverlay = document.getElementById("modal-overlay");
   var modalImg = document.getElementById("modal-img");
+  var modalPre = document.getElementById("modal-pre");
+  var modalCaption = document.getElementById("modal-caption");
   var modalClose = document.getElementById("modal-close");
-  if (modalOverlay && modalImg && modalClose) {
+  if (modalOverlay && modalImg && modalPre && modalCaption && modalClose) {
     var modalTrigger = null;
 
-    function openModal(src, alt) {
-      modalImg.src = src;
-      modalImg.alt = alt || "";
+    function openModal(opts) {
+      modalImg.hidden = !opts.src;
+      modalPre.hidden = !!opts.src;
+      if (opts.src) {
+        modalImg.src = opts.src;
+        modalImg.alt = opts.alt || "";
+      } else {
+        modalPre.innerHTML = opts.html || "";
+        modalPre.setAttribute("aria-label", opts.alt || "");
+      }
+      modalCaption.textContent = opts.caption || "";
+      modalCaption.hidden = !opts.caption;
       modalOverlay.hidden = false;
       document.body.style.overflow = "hidden";
       modalClose.focus();
@@ -224,14 +238,30 @@
     function closeModal() {
       modalOverlay.hidden = true;
       modalImg.src = "";
+      modalPre.innerHTML = "";
+      modalCaption.textContent = "";
       document.body.style.overflow = "";
       if (modalTrigger) modalTrigger.focus();
     }
 
-    Array.prototype.slice.call(document.querySelectorAll("[data-modal-src]")).forEach(function (btn) {
+    Array.prototype.slice.call(document.querySelectorAll("[data-modal-src], [data-modal-demo], [data-modal-from]")).forEach(function (btn) {
       btn.addEventListener("click", function () {
         modalTrigger = btn;
-        openModal(btn.getAttribute("data-modal-src"), btn.getAttribute("data-modal-alt"));
+        var opts = { alt: btn.getAttribute("data-modal-alt"), caption: btn.getAttribute("data-modal-caption") };
+        if (btn.hasAttribute("data-modal-src")) {
+          opts.src = btn.getAttribute("data-modal-src");
+        } else if (btn.hasAttribute("data-modal-demo")) {
+          var demo = demos[btn.getAttribute("data-modal-demo")];
+          if (!demo) return;
+          var scratch = document.createElement("pre");
+          renderStatic(scratch, demo);
+          opts.html = scratch.innerHTML;
+        } else {
+          var source = document.querySelector(btn.getAttribute("data-modal-from"));
+          if (!source) return;
+          opts.html = esc(source.textContent);
+        }
+        openModal(opts);
       });
     });
     modalClose.addEventListener("click", closeModal);

@@ -59,7 +59,7 @@
 
 :root {
   --bg: #050505;
-  --panel: #0b0b0b;
+  --panel: #161616;     /* code / command surfaces */
   --fg: #f4f4f4;
   --muted: #9a9a9a;
   --line: #2a2a2a;
@@ -207,7 +207,7 @@ ul { list-style: none; }
   color: var(--fg);
 }
 .menu-item + .menu-item { border-top: 1px solid var(--line); }
-.menu-item:hover { text-decoration: none; background: #111; }
+.menu-item:hover { text-decoration: none; background: #1f1f1f; }
 .menu-item-title {
   display: block;
   font-size: 13px;
@@ -305,17 +305,17 @@ ul { list-style: none; }
   padding: 72px 32px 80px;
   max-width: var(--measure);
 }
-.flow { max-width: 56rem; }
-.stratum {
+.platform-grid {
   display: grid;
-  grid-template-columns: 19ch 1fr;
-  gap: 24px;
-  align-items: baseline;
-  padding: 16px 0;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 56px;
+  max-width: 56rem;
 }
+.stratum { padding: 14px 0; }
 .stratum + .stratum {
   position: relative;
-  padding-top: 32px;
+  padding-top: 30px;
 }
 .stratum + .stratum::before {
   content: "";
@@ -328,41 +328,24 @@ ul { list-style: none; }
   font-size: 13px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  margin-bottom: 4px;
 }
 .stratum-items { color: var(--muted); font-size: 14px; }
 .stratum-items .sep { color: var(--muted); opacity: 0.55; margin: 0 6px; }
-.strata-drop {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 8px;
-  color: var(--muted);
-  font-size: 10px;
-  line-height: 1;
-}
-.strata-drop i { display: block; width: 1px; height: 28px; background: var(--line); }
-.strata-drop span { margin-top: 2px; }
+.flow-sink-wrap { display: flex; align-items: center; gap: 12px; }
+.flow-link { display: flex; align-items: center; gap: 4px; color: var(--muted); font-size: 10px; }
+.flow-link b { font-weight: 400; }
+.flow-link i { display: block; width: 40px; height: 1px; background: var(--line); }
 .flow-sink {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 12px;
-  width: max-content;
-  margin: 10px auto 0;
   padding: 14px 28px;
   border: 1px solid var(--fg);
   font-family: "Space Grotesk", sans-serif;
   font-weight: 700;
   font-size: 18px;
   letter-spacing: 0.14em;
-}
-.flow-sink-sub {
-  margin-top: 12px;
-  text-align: center;
-  font-size: 12px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
 }
 
 /* ---- 03–05 Instrument rows ---- */
@@ -430,6 +413,8 @@ ul { list-style: none; }
 }
 .visual-caption { font-size: 12px; color: var(--muted); }
 .btn-view { font-size: 13px; padding: 12px 20px; }
+.instrument-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.instrument-actions .btn { margin-top: 0; }
 
 /* Agent signals: three planned subareas, set as a compact grid under
    the paragraph. Lowercase items on purpose: it's a scope list, not a
@@ -524,9 +509,6 @@ ul { list-style: none; }
   white-space: pre;
 }
 .code-block code[hidden] { display: none; }
-.code-caption { font-size: 12px; color: var(--muted); margin-top: 10px; }
-.code-caption[hidden] { display: none; }
-.code-caption code { color: var(--fg); }
 
 /* Syntax tokens, hand-marked in the HTML (no highlight library). The
    palette deliberately reuses the site's four inks rather than importing
@@ -591,6 +573,8 @@ ul { list-style: none; }
 .tab-pkg.is-active { border-top: 3px solid var(--pkg); }
 .tab-cli.is-active { border-top: 3px solid var(--cli); }
 
+.tab-note { font-size: 10px; color: var(--muted); margin-left: 6px; text-transform: uppercase; letter-spacing: 0.08em; }
+
 /* Compact variant for the per-product install-command tabs. */
 .tabs-sm .tab { padding: 8px 14px; font-size: 12px; }
 
@@ -635,22 +619,43 @@ ul { list-style: none; }
   padding: 72px 32px 72px;
   max-width: var(--measure);
 }
-.diagram {
+.diagram-scroll { overflow-x: auto; margin-top: 40px; }
+.diagram-wide {
+  display: block;
+  width: 100%;
+  max-width: 720px;
+  min-width: 600px;
+  height: auto;
+  overflow: visible;
+  font-size: 13px;
+}
+.diagram-wide text { font-family: inherit; fill: var(--muted); }
+.diagram-wide .dg-h { fill: var(--fg); font-size: 12px; letter-spacing: 0.12em; }
+.diagram-wide .dg-b { fill: var(--fg); font-weight: 700; }
+.diagram-wide .dg-n { font-size: 12px; }
+.diagram-wide .dg-c { stroke: #555; stroke-width: 1; fill: none; }
+.diagram-wide .dg-arrow { fill: #555; }
+.diagram-wide .dg-node { fill: none; stroke: var(--fg); stroke-width: 1; }
+.diagram-wide .dg-pkg { fill: var(--pkg); }
+.diagram-wide .dg-cli { fill: var(--cli); }
+.diagram-wide .dg-cap { fill: var(--cap); }
+
+/* Stacked variant for narrow screens. */
+.diagram-narrow {
+  display: none;
   margin-top: 40px;
   font-size: 13px;
   line-height: 1.75;
   color: var(--muted);
 }
-.diagram-wide { white-space: pre; overflow-x: auto; }
-.diagram-narrow { display: none; }
-.dg-h { color: var(--fg); letter-spacing: 0.12em; }   /* COLLECT / ANALYZE / USE */
-.dg-b { color: var(--fg); font-weight: 700; }         /* Product Signals, DuckDB / Parquet */
-.dg-c { color: #555; }                             /* connectors */
-.dg-n { font-size: 12px; }                            /* "when persisted" */
-.dg-m { font-weight: 700; }                           /* family markers */
-.dg-pkg { color: var(--pkg); }
-.dg-cli { color: var(--cli); }
-.dg-cap { color: var(--cap); }
+.diagram-narrow .dg-h { color: var(--fg); letter-spacing: 0.12em; }
+.diagram-narrow .dg-b { color: var(--fg); font-weight: 700; }
+.diagram-narrow .dg-c { color: #555; }
+.diagram-narrow .dg-n { font-size: 12px; }
+.diagram-narrow .dg-m { font-weight: 700; }
+.diagram-narrow .dg-pkg { color: var(--pkg); }
+.diagram-narrow .dg-cli { color: var(--cli); }
+.diagram-narrow .dg-cap { color: var(--cap); }
 .diagram-narrow .dg-h { margin-top: 4px; font-size: 12px; text-transform: uppercase; }
 .diagram-narrow .dg-item { white-space: nowrap; }
 .diagram-narrow .dg-row { color: var(--fg); }
@@ -751,6 +756,19 @@ ul { list-style: none; }
   background: var(--bg);
 }
 .modal-box img { display: block; width: 100%; height: auto; max-height: 85vh; object-fit: contain; }
+.modal-box img[hidden], .modal-pre[hidden], .modal-caption[hidden] { display: none; }
+.modal-pre {
+  padding: 28px 32px;
+  font-size: 15px;
+  line-height: 1.7;
+  white-space: pre;
+  overflow: auto;
+  max-height: 80vh;
+  background: var(--panel);
+}
+.modal-pre .prompt { color: var(--muted); }
+.modal-pre .tcmd { font-weight: 700; color: var(--cli); }
+.modal-caption { padding: 12px 32px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); }
 .modal-close {
   position: fixed;
   top: 24px;
@@ -784,11 +802,15 @@ ul { list-style: none; }
   .footer::before { left: 20px; right: 20px; }
   .modal-overlay { padding: 16px; }
   .modal-close { top: 16px; right: 16px; }
-  .stratum { grid-template-columns: 1fr; gap: 6px; }
+  .platform-grid { grid-template-columns: 1fr; gap: 24px; }
+  .flow-sink-wrap { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .flow-link { flex-direction: column; }
+  .flow-link i { width: 1px; height: 28px; }
+  .flow-link b { display: inline-block; transform: rotate(90deg); font-weight: 400; }
   .subareas { gap: 12px; }
 }
 @media (max-width: 600px) {
-  .diagram-wide { display: none; }
+  .diagram-scroll { display: none; }
   .diagram-narrow { display: block; }
   .how-tenets { font-size: 13px; letter-spacing: 0.02em; }
   .how-tenets .sep { margin: 0 6px; }

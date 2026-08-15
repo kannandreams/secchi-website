@@ -75,27 +75,28 @@
   leaves behind: in a registry, on a machine, or inside an agent's run.
   Secchi collects the three families and reads them together.</p>
 
-  <div class="flow">
+  <div class="platform-grid">
     <div class="strata" aria-label="Signal families feeding Secchi">
       <div class="stratum">
         <p class="stratum-label c-pkg">■ Ecosystem</p>
         <p class="stratum-items">Packages <span class="sep">·</span> Registries <span class="sep">·</span> GitHub <span class="sep">·</span> Adoption</p>
       </div>
       <div class="stratum">
-        <p class="stratum-label c-cli">■ Product usage</p>
-        <p class="stratum-items">CLI <span class="sep">·</span> SDK <span class="sep">·</span> Commands <span class="sep">·</span> Errors</p>
+        <p class="stratum-label c-cli">■ Runtime</p>
+        <p class="stratum-items">CLI <span class="sep">·</span> SDK <span class="sep">·</span> Commands <span class="sep">·</span> Invocations</p>
       </div>
       <div class="stratum">
-        <p class="stratum-label c-cap">■ Agent</p>
+        <p class="stratum-label c-cap">■ Agent runtime</p>
         <p class="stratum-items">Tools <span class="sep">·</span> MCP <span class="sep">·</span> Context <span class="sep">·</span> Capabilities</p>
       </div>
     </div>
-    <div class="strata-drop" aria-hidden="true"><i></i><span>&#9660;</span></div>
-    <div class="flow-sink">
-      <span class="disk-glyph" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-      <span class="flow-sink-name">SECCHI</span>
+    <div class="flow-sink-wrap">
+      <span class="flow-link" aria-hidden="true"><i></i><b>&#9654;</b></span>
+      <div class="flow-sink">
+        <span class="disk-glyph" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span class="flow-sink-name">SECCHI</span>
+      </div>
     </div>
-    <p class="flow-sink-sub">Product Signals Platform</p>
   </div>
 </section>
 
@@ -130,10 +131,13 @@
           <div class="install-line" data-cmd-panel="pip" hidden><span class="prompt">$ </span><code>pip install secchi</code></div>
         </div>
       </div>
-      <button type="button" class="btn btn-view" data-modal-src="/assets/secchi-dashboard-preview.png"
-              data-modal-alt="The Secchi terminal dashboard showing adoption, health score, and version metrics for a package">
-        &#9654; Dashboard preview
-      </button>
+      <div class="instrument-actions">
+        <button type="button" class="btn btn-view" data-modal-src="/assets/secchi-dashboard-preview.png"
+                data-modal-alt="The Secchi terminal dashboard showing adoption, health score, and version metrics for a package">
+          &#9654; Preview
+        </button>
+        <a class="btn btn-view btn-docs" href="https://docs.secchi.dev/getting-started/">Read docs</a>
+      </div>
     </div>
     <div class="instrument-visual">
       <div class="terminal" data-terminal="pkg" data-active="pkg">
@@ -171,7 +175,7 @@
       <div class="cmd" data-cmd-group>
         <div class="tabs tabs-sm" role="tablist" aria-label="Integration example">
           <button class="tab tab-cli is-active" role="tab" aria-selected="true" data-cmd-tab="clap">clap, Rust</button>
-          <button class="tab tab-cli" role="tab" aria-selected="false" data-cmd-tab="click">click, Python</button>
+          <button class="tab tab-cli" role="tab" aria-selected="false" data-cmd-tab="click">click, Python <span class="tab-note">planned</span></button>
         </div>
         <pre class="code-block"><code data-cmd-panel="clap"><span class="tok-k">let</span> analytics = <span class="tok-t">Analytics</span>::<span class="tok-f">builder</span>(<span class="tok-s">"myctl"</span>)
     .<span class="tok-f">cli_version</span>(<span class="tok-f">env!</span>(<span class="tok-s">"CARGO_PKG_VERSION"</span>))
@@ -189,8 +193,13 @@ analytics.<span class="tok-f">record_exit</span>(&amp;matches, exit_code, error_
     ...
 
 <span class="tok-f">instrument</span>(cli, app_name=<span class="tok-s">"myctl"</span>)</code></pre>
-        <p class="code-caption" data-cmd-caption="clap">Real integration code, from <code>secchi-analytics-clap</code>. Shipped today.</p>
-        <p class="code-caption" data-cmd-caption="click" hidden>The planned Click adapter's API. Not shipped yet.</p>
+      </div>
+      <div class="instrument-actions">
+        <button type="button" class="btn btn-view" data-modal-demo="cli"
+                data-modal-alt="Captured output of secchi-analytics stats and tail">
+          &#9654; Preview
+        </button>
+        <a class="btn btn-view btn-docs" href="https://github.com/kannandreams/secchi-cli-analytics">Read docs</a>
       </div>
     </div>
     <div class="instrument-visual">
@@ -251,9 +260,16 @@ analytics.<span class="tok-f">record_exit</span>(&amp;matches, exit_code, error_
           </ul>
         </div>
       </div>
+      <div class="instrument-actions">
+        <button type="button" class="btn btn-view" data-modal-from="#agent-sketch"
+                data-modal-caption="A concept sketch, not captured output.">
+          &#9654; Preview
+        </button>
+        <a class="btn btn-view btn-docs" href="https://docs.secchi.dev/mcp/">Read docs</a>
+      </div>
     </div>
     <div class="instrument-visual">
-      <pre class="code-block">Capability             Invoked  Success Avg latency
+      <pre class="code-block" id="agent-sketch">Capability             Invoked  Success Avg latency
 github.search_code       1,842      94%       420ms
 shell.exec                1,204      88%        1.2s
 postgres-debugging          341      91%        3.4s
@@ -279,19 +295,54 @@ docs-search-v1</pre>
 <!-- 06 HOW SECCHI WORKS -->
 <section class="how" id="how">
   <h2 class="section-title">From signals to answers.</h2>
-  <!-- Fan-in / fan-out, drawn in monospace like the rest of the site.
-       Wide diagram on desktop; a stacked variant takes over on narrow
-       screens where 66 columns can't fit. -->
-  <pre class="diagram diagram-wide" aria-label="Sources fan in to Product Signals, which fan out to the CLI, TUI, reports, CI/CD, MCP, and API; persisted to DuckDB or Parquet when needed"><span class="dg-h">COLLECT</span>               <span class="dg-h">ANALYZE</span>                         <span class="dg-h">USE</span>
-
-<span class="dg-m dg-pkg">■</span> Registries <span class="dg-c">─┐</span>                                       <span class="dg-c">┌─</span> CLI / TUI
-<span class="dg-m dg-pkg">■</span> GitHub <span class="dg-c">─────┤</span>                                       <span class="dg-c">├─</span> Reports
-<span class="dg-m dg-cli">■</span> CLI <span class="dg-c">────────┼</span><span class="dg-c">────►</span>  <span class="dg-b">Product Signals</span>  <span class="dg-c">───────────────</span><span class="dg-c">┼─</span> CI/CD
-<span class="dg-m dg-cli">■</span> SDK <span class="dg-c">────────┤</span>              <span class="dg-c">│</span>                        <span class="dg-c">├─</span> MCP
-<span class="dg-m dg-cap">■</span> Agents <span class="dg-c">─────┘</span>              <span class="dg-c">│</span>                        <span class="dg-c">└─</span> API
-                             <span class="dg-c">▼</span>
-                     <span class="dg-b">DuckDB / Parquet</span>
-                      <span class="dg-n">when persisted</span></pre>
+  <!-- Fan-in / fan-out as inline SVG (crisp lines, site palette, labels
+       in the site font). A stacked HTML variant takes over on narrow
+       screens where the wide diagram can't fit. -->
+  <div class="diagram-scroll">
+  <svg class="diagram diagram-wide" viewBox="0 0 720 260" role="img" aria-label="Registries, GitHub, CLI, SDK and Agents fan in to Product Signals, which fan out to the CLI and TUI, reports, CI/CD, MCP and API; persisted to DuckDB or Parquet when needed">
+    <text class="dg-h" x="0" y="16">COLLECT</text>
+    <text class="dg-h" x="340" y="16" text-anchor="middle">ANALYZE</text>
+    <text class="dg-h" x="600" y="16">USE</text>
+    <g class="dg-c" shape-rendering="crispEdges">
+      <line x1="110" y1="56" x2="170" y2="56"/>
+      <line x1="560" y1="56" x2="592" y2="56"/>
+      <line x1="110" y1="84" x2="170" y2="84"/>
+      <line x1="560" y1="84" x2="592" y2="84"/>
+      <line x1="110" y1="112" x2="170" y2="112"/>
+      <line x1="560" y1="112" x2="592" y2="112"/>
+      <line x1="110" y1="140" x2="170" y2="140"/>
+      <line x1="560" y1="140" x2="592" y2="140"/>
+      <line x1="110" y1="168" x2="170" y2="168"/>
+      <line x1="560" y1="168" x2="592" y2="168"/>
+      <line x1="170" y1="56" x2="170" y2="168"/>
+      <line x1="560" y1="56" x2="560" y2="168"/>
+      <line x1="170" y1="112" x2="244" y2="112"/>
+      <line x1="430" y1="112" x2="560" y2="112"/>
+      <line x1="340" y1="130" x2="340" y2="194" stroke-dasharray="3 3"/>
+    </g>
+    <polygon class="dg-arrow" points="244,108 250,112 244,116"/>
+    <polygon class="dg-arrow" points="336,194 344,194 340,200"/>
+    <rect class="dg-pkg" x="0" y="48" width="8" height="8"/>
+    <text x="16" y="56">Registries</text>
+    <rect class="dg-pkg" x="0" y="76" width="8" height="8"/>
+    <text x="16" y="84">GitHub</text>
+    <rect class="dg-cli" x="0" y="104" width="8" height="8"/>
+    <text x="16" y="112">CLI</text>
+    <rect class="dg-cli" x="0" y="132" width="8" height="8"/>
+    <text x="16" y="140">SDK</text>
+    <rect class="dg-cap" x="0" y="160" width="8" height="8"/>
+    <text x="16" y="168">Agents</text>
+    <rect class="dg-node" x="250" y="94" width="180" height="36"/>
+    <text class="dg-b" x="340" y="117" text-anchor="middle">Product Signals</text>
+    <text x="600" y="56">CLI / TUI</text>
+    <text x="600" y="84">Reports</text>
+    <text x="600" y="112">CI/CD</text>
+    <text x="600" y="140">MCP</text>
+    <text x="600" y="168">API</text>
+    <text class="dg-b" x="340" y="223" text-anchor="middle">DuckDB / Parquet</text>
+    <text class="dg-n" x="340" y="243" text-anchor="middle">when persisted</text>
+  </svg>
+  </div>
   <div class="diagram diagram-narrow" aria-hidden="true">
     <p class="dg-h">Collect</p>
     <p class="dg-row"><span class="dg-item"><span class="dg-m dg-pkg">■</span> Registries</span> <span class="dg-c">·</span> <span class="dg-item"><span class="dg-m dg-pkg">■</span> GitHub</span> <span class="dg-c">·</span> <span class="dg-item"><span class="dg-m dg-cli">■</span> CLI</span> <span class="dg-c">·</span> <span class="dg-item"><span class="dg-m dg-cli">■</span> SDK</span> <span class="dg-c">·</span> <span class="dg-item"><span class="dg-m dg-cap">■</span> Agents</span></p>
@@ -382,8 +433,10 @@ docs-search-v1</pre>
 
 <div class="modal-overlay" id="modal-overlay" hidden>
   <button type="button" class="modal-close" id="modal-close" aria-label="Close">&#10005;</button>
-  <div class="modal-box" role="dialog" aria-modal="true" aria-label="Screenshot">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-label="Preview">
     <img id="modal-img" src="" alt="">
+    <pre id="modal-pre" class="modal-pre" hidden></pre>
+    <p id="modal-caption" class="modal-caption" hidden></p>
   </div>
 </div>
 
