@@ -692,7 +692,7 @@ ul { list-style: none; }
 }
 /* Answers window: one real artifact per output surface. Neutral active
    tab (white), because this window spans all three families. */
-.answers { max-width: 64rem; margin-top: 8px; }
+.answers { margin-top: 8px; }
 .answers .wtabs { flex-wrap: wrap; gap: 8px; }
 .answers .wtab { font-size: 13px; padding: 12px 14px 10px; }
 .answers .wtab.is-active { border-bottom-color: var(--fg); }
@@ -700,7 +700,18 @@ ul { list-style: none; }
 .answer-shot { padding: 16px 18px 18px; }
 .answer-cmd { font-size: 13px; }
 .answer-cmd .prompt { color: var(--muted); }
-.answer-shot img { display: block; width: 100%; height: auto; margin-top: 12px; border: 1px solid var(--line); }
+.answer-zoom {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 0;
+  border: 1px solid var(--line);
+  background: transparent;
+  cursor: zoom-in;
+}
+.answer-zoom:hover { border-color: var(--act); }
+.answer-shot img { display: block; width: 100%; height: auto; }
+.answer-hint { color: var(--act); }
 .answer-caption {
   padding: 10px 18px 14px;
   font-size: 12px;
