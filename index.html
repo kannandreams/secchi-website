@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Secchi: Product Signals Platform for DevTools and Agents</title>
-<meta name="description" content="Secchi is a product signals platform built for DevTools and agents. Understand how your packages, CLIs, SDKs, and agent capabilities are adopted and used.">
+<title>Secchi: CLI Analytics for DevTools</title>
+<meta name="description" content="Secchi helps CLI builders understand package adoption and how their CLI is actually used.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
@@ -13,16 +13,16 @@
 <link rel="manifest" href="/site.webmanifest">
 <link rel="canonical" href="https://secchi.dev/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Secchi: Product Signals Platform for DevTools and Agents">
-<meta property="og:description" content="Understand how your packages, CLIs, SDKs, and agent capabilities are adopted and used.">
+<meta property="og:title" content="Secchi: CLI Analytics for DevTools">
+<meta property="og:description" content="Understand package adoption and how your CLI is actually used.">
 <meta property="og:url" content="https://secchi.dev/">
 <meta property="og:image" content="https://secchi.dev/assets/secchi-og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Secchi: Product Signals Platform, built for DevTools and agents">
+<meta property="og:image:alt" content="Secchi CLI Analytics, built for CLI builders">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Secchi: Product Signals Platform for DevTools and Agents">
-<meta name="twitter:description" content="Understand how your packages, CLIs, SDKs, and agent capabilities are adopted and used.">
+<meta name="twitter:title" content="Secchi: CLI Analytics for DevTools">
+<meta name="twitter:description" content="Understand package adoption and how your CLI is actually used.">
 <meta name="twitter:image" content="https://secchi.dev/assets/secchi-og.png">
 <link rel="stylesheet" href="/css/site.css">
 </head>
@@ -49,16 +49,12 @@
       </button>
       <div class="menu-panel" id="solutions-menu" hidden>
         <a class="menu-item" href="#package-signals">
-          <span class="menu-item-title c-pkg">Package Signals</span>
+          <span class="menu-item-title c-pkg">Package Analytics</span>
           <span class="menu-item-desc">Understand package adoption, health, dependencies, and ecosystem activity.</span>
         </a>
         <a class="menu-item" href="#product-usage-signals">
-          <span class="menu-item-title c-cli">CLI Signals</span>
+          <span class="menu-item-title c-cli">CLI Analytics</span>
           <span class="menu-item-desc">Understand how your CLI is used, where it fails, and how usage evolves.</span>
-        </a>
-        <a class="menu-item" href="#agent-signals">
-          <span class="menu-item-title c-cap">Agent Signals <span class="tag-planned">Planned</span></span>
-          <span class="menu-item-desc">Understand agent capabilities, context usage, and execution.</span>
         </a>
       </div>
     </div>
@@ -71,10 +67,9 @@
 
 <!-- 01 HERO -->
 <section class="hero">
-  <h1>PRODUCT<br>SIGNALS<br>PLATFORM.</h1>
-  <p class="hero-tag">Built for DevTools &amp; Agents.</p>
-  <p class="hero-sub">Understand how your packages, CLIs, SDKs, and agent
-  capabilities are adopted and used.</p>
+  <h1>CLI<br>ANALYTICS.</h1>
+  <p class="hero-tag">Built for CLI Builders.</p>
+  <p class="hero-sub">Understand package adoption and how your CLI is actually used.</p>
   <div class="hero-cta">
     <a class="btn btn-solid" href="https://docs.secchi.dev/getting-started/">Get started</a>
     <a class="btn" href="https://github.com/kannandreams/secchi">View on GitHub</a>
@@ -85,26 +80,21 @@
 <!-- 02 PLATFORM IDEA -->
 <section class="platform" id="platform">
   <h2 class="section-title">See your product from ecosystem to runtime.</h2>
-  <p class="section-sub">A product signal is any measurable trace your product
-  leaves behind: in a registry, on a machine, or inside an agent's run.
-  Secchi collects the three families and reads them together.</p>
+  <p class="section-sub">Analytics are measurable traces your product leaves
+  behind: in a registry or on a machine. Secchi collects the two families and
+  reads them together.</p>
 
   <div class="platform-grid">
-    <div class="strata" aria-label="Signal families feeding Secchi">
+    <div class="strata" aria-label="Analytics families feeding Secchi">
       <div class="stratum">
         <p class="stratum-label c-pkg">■ Ecosystem</p>
         <p class="stratum-items">Packages <span class="sep">·</span> Registries <span class="sep">·</span> GitHub <span class="sep">·</span> Dependencies</p>
         <p class="stratum-learn"><span class="arrow" aria-hidden="true">→</span> adoption <span class="sep">·</span> health <span class="sep">·</span> releases <span class="sep">·</span> security</p>
       </div>
       <div class="stratum">
-        <p class="stratum-label c-cli">■ Product runtime</p>
-        <p class="stratum-items">CLI <span class="sep">·</span> SDK</p>
+        <p class="stratum-label c-cli">■ CLI runtime</p>
+        <p class="stratum-items">CLI</p>
         <p class="stratum-learn"><span class="arrow" aria-hidden="true">→</span> usage <span class="sep">·</span> versions <span class="sep">·</span> failures <span class="sep">·</span> performance</p>
-      </div>
-      <div class="stratum">
-        <p class="stratum-label c-cap">■ Agent runtime</p>
-        <p class="stratum-items">Tools <span class="sep">·</span> MCP <span class="sep">·</span> Context <span class="sep">·</span> Capabilities</p>
-        <p class="stratum-learn"><span class="arrow" aria-hidden="true">→</span> usage <span class="sep">·</span> success <span class="sep">·</span> latency <span class="sep">·</span> utilization</p>
       </div>
     </div>
     <div class="flow-sink-wrap">
@@ -118,7 +108,7 @@
     <!-- Illustrative charts, not captured data: one per family, in that
          family's colour, directly labelled so identity is never colour-alone. -->
       <div class="signal-panel">
-        <svg class="signals" viewBox="0 0 300 286" role="img" aria-label="Illustrative charts: ecosystem health breakdown, CLI invocations against p95 latency, and drift in agent context retrieval">
+        <svg class="signals" viewBox="0 0 300 214" role="img" aria-label="Illustrative charts: ecosystem health breakdown and CLI invocations against p95 latency">
           <text class="sg-h" x="0" y="8">ECOSYSTEM</text>
           <text class="sg-s" x="300" y="8" text-anchor="end">health 86 / 100</text>
           <text class="sg-l" x="0" y="29">Maintenance</text>
@@ -137,7 +127,7 @@
           <rect class="sg-track" x="104" y="66" width="148" height="6"/>
           <rect class="sg-fill-pkg" x="104" y="66" width="148.0" height="6"/>
           <text class="sg-v" x="300" y="71" text-anchor="end">15/15</text>
-          <text class="sg-h" x="0" y="108">PRODUCT RUNTIME</text>
+          <text class="sg-h" x="0" y="108">CLI RUNTIME</text>
           <text class="sg-s" x="300" y="108" text-anchor="end">invocations · p95</text>
           <rect class="sg-fill-cli" x="1.0" y="140.3" width="8.7" height="11.7"/>
           <rect class="sg-fill-cli" x="11.7" y="128.5" width="8.7" height="23.5"/>
@@ -172,13 +162,6 @@
           <polyline class="sg-cli" points="5.4,181.9 16.1,179.0 26.8,182.6 37.5,184.0 48.2,181.6 58.9,180.8 69.6,184.7 80.4,185.2 91.1,180.5 101.8,181.7 112.5,185.1 123.2,184.0 133.9,182.9 144.6,185.6 155.4,187.5 166.1,185.6 176.8,182.9 187.5,187.1 198.2,186.5 208.9,184.8 219.6,184.1 230.4,187.6 241.1,188.7 251.8,185.7 262.5,186.1 273.2,189.7 283.9,186.0 294.6,186.3"/>
           <line class="sg-base" x1="0" y1="196" x2="300" y2="196"/>
           <text class="sg-l" x="0" y="205">p95 ms</text>
-          <text class="sg-h" x="0" y="232">AGENT RUNTIME</text>
-          <text class="sg-s" x="300" y="232" text-anchor="end">context retrieval drift</text>
-          <line class="sg-ref" x1="0" y1="250" x2="300" y2="250"/>
-          <text class="sg-l" x="300" y="247" text-anchor="end">baseline</text>
-          <polyline class="sg-cap" points="0.0,249.0 7.7,252.5 15.4,251.4 23.1,247.5 30.8,247.6 38.5,251.0 46.2,253.0 53.8,249.8 61.5,246.9 69.2,249.5 76.9,251.2 84.6,249.6 92.3,248.8 100.0,248.5 107.7,252.8 115.4,253.6 123.1,251.1 130.8,252.0 138.5,253.7 146.2,257.9 153.8,256.1 161.5,255.2 169.2,256.5 176.9,260.5 184.6,263.6 192.3,261.6 200.0,260.4 207.7,265.3 215.4,266.8 223.1,266.9 230.8,266.7 238.5,268.2 246.2,271.1 253.8,274.7 261.5,271.4 269.2,271.7 276.9,276.7 284.6,279.0 292.3,278.5 300.0,276.9"/>
-          <rect class="sg-dot-cap" x="297.0" y="273.9" width="6" height="6"/>
-          <line class="sg-base" x1="0" y1="286" x2="300" y2="286"/>
         </svg>
         <p class="signal-caption">Illustrative</p>
       </div>
@@ -187,10 +170,10 @@
 
 <section class="instruments" id="products">
 
-  <!-- 03 PACKAGE SIGNALS -->
+  <!-- 03 PACKAGE ANALYTICS -->
   <div class="instrument instrument-pkg" id="package-signals">
     <div class="instrument-text">
-      <p class="product-label c-pkg">■ Package signals</p>
+      <p class="product-label c-pkg">■ Package analytics</p>
       <h2>Understand your ecosystem.</h2>
       <p>Registry metadata, downloads, releases, dependencies, security and
       GitHub activity in one view. Across PyPI, npm, crates.io, Homebrew,
@@ -237,12 +220,12 @@
     </div>
   </div>
 
-  <!-- 04 PRODUCT USAGE SIGNALS -->
+  <!-- 04 CLI USAGE ANALYTICS -->
   <div class="instrument instrument-cli" id="product-usage-signals">
     <div class="instrument-text">
-      <p class="product-label c-cli">■ Product usage signals <span class="label-scope">CLI · SDK</span></p>
+      <p class="product-label c-cli">■ CLI usage analytics</p>
       <h2>Understand how your product is actually used.</h2>
-      <p>Instrument your CLI or SDK to understand feature usage, versions,
+      <p>Instrument your CLI to understand feature usage, versions,
       failures and performance without collecting command values or
       application data.</p>
       <p>It only ever records command and flag <em>names</em>, never the
@@ -304,85 +287,12 @@ analytics.<span class="tok-f">record_exit</span>(&amp;matches, exit_code, error_
     </div>
   </div>
 
-  <!-- 05 AGENT SIGNALS -->
-  <div class="instrument instrument-cap instrument-planned" id="agent-signals">
-    <div class="instrument-text">
-      <p class="product-label c-cap">■ Agent signals <span class="tag-planned">Planned</span></p>
-      <h2>Understand how your agents actually operate.</h2>
-      <p>Agents rely on tools, MCP servers, skills, and context, much of
-      which you didn't build yourself. Agent signals apply the same
-      discipline used for CLI commands to the whole run: which capabilities
-      get used, what context they pull in, and how each execution ends.</p>
-      <p>Same engine, same privacy principles: capability names and
-      outcomes, not content. Local-first by default.</p>
-      <div class="subareas">
-        <div class="subarea">
-          <p class="subarea-head c-cap">Capabilities</p>
-          <ul>
-            <li>tools</li>
-            <li>MCP</li>
-            <li>skills</li>
-            <li>usage</li>
-            <li>success</li>
-          </ul>
-        </div>
-        <div class="subarea">
-          <p class="subarea-head c-cap">Context</p>
-          <ul>
-            <li>sources</li>
-            <li>retrieval</li>
-            <li>tokens</li>
-            <li>injection</li>
-            <li>growth</li>
-          </ul>
-        </div>
-        <div class="subarea">
-          <p class="subarea-head c-cap">Execution</p>
-          <ul>
-            <li>runs</li>
-            <li>latency</li>
-            <li>failures</li>
-            <li>retries</li>
-            <li>outcomes</li>
-          </ul>
-        </div>
-      </div>
-      <div class="instrument-actions">
-        <button type="button" class="btn btn-view" data-modal-from="#agent-sketch"
-                data-modal-caption="A concept sketch, not captured output.">
-          &#9654; Preview
-        </button>
-        <a class="btn btn-view btn-docs" href="https://docs.secchi.dev/mcp/">Read docs</a>
-      </div>
-    </div>
-    <div class="instrument-visual">
-      <pre class="code-block" id="agent-sketch">Capability             Invoked  Success Avg latency
-github.search_code       1,842      94%       420ms
-shell.exec                1,204      88%        1.2s
-postgres-debugging          341      91%        3.4s
-linear.create_issue         128      97%       610ms
-security-agent                42      71%      18.2s
-browser                       12      58%        4.1s
-
-Unused capabilities
-────────────────────
-jira-mcp
-legacy-db-skill
-docs-search-v1</pre>
-      <p class="visual-caption">A concept sketch, not captured output. Ships on the same engine as CLI analytics.</p>
-      <ul class="ticks ticks-cap mini-ticks">
-        <li>Invocation count and success rate, per capability</li>
-        <li>Unused capabilities flagged automatically</li>
-        <li>Same engine, same privacy rules as CLI analytics</li>
-      </ul>
-    </div>
-  </div>
 </section>
 
 <!-- 06 HOW SECCHI WORKS -->
 <section class="how" id="how">
-  <h2 class="section-title">From signals to answers.</h2>
-  <p class="section-sub">The same signals, wherever the decision happens: in
+  <h2 class="section-title">From analytics to answers.</h2>
+  <p class="section-sub">The same analytics, wherever the decision happens: in
   your terminal, in a report, on a pull request, inside a coding agent, or as
   JSON for everything else.</p>
 
@@ -422,7 +332,7 @@ docs-search-v1</pre>
 Registry: pypi
 
 <span class="tok-t">## Overview</span>
-| Signal               | Value                          |
+| Analytics            | Value                          |
 | -------------------- | ------------------------------ |
 | Health score         | 89 / 100 (B)                   |
 | Latest version       | 1.5.5                          |
@@ -466,12 +376,12 @@ Registry: pypi
 }
 
 <span class="tok-d">// tools</span>
-<span class="tok-f">inspect_package</span>    health, adoption, releases, dependencies, repo signals
+<span class="tok-f">inspect_package</span>    health, adoption, releases, dependencies, repo analytics
 <span class="tok-f">search_packages</span>    ranked matches across supported ecosystems
 <span class="tok-f">inspect_project</span>    a configured project, sources combined
 <span class="tok-f">check_package</span>      health and repository CI policies
 <span class="tok-f">compare_packages</span>   rank choices with evidence and confidence</pre>
-      <p class="answer-caption">A read-only MCP server for coding agents. Same signals, inside the loop.</p>
+      <p class="answer-caption">A read-only MCP server for coding agents. Same analytics, inside the loop.</p>
     </div>
 
     <div class="answer" data-cmd-panel="json" hidden>
@@ -492,13 +402,13 @@ Registry: pypi
   </div>
 </section>
 
-<!-- 07 SIGNAL COVERAGE -->
+<!-- 07 ANALYTICS COVERAGE -->
 <section class="caps" id="coverage">
-  <p class="section-eyebrow">Signal coverage</p>
-  <h2 class="section-title">Product signals, from ecosystem to execution.</h2>
+  <p class="section-eyebrow">Analytics coverage</p>
+  <h2 class="section-title">CLI analytics, from ecosystem to execution.</h2>
   <div class="caps-grid">
     <div class="caps-col">
-      <p class="product-label c-pkg">■ Ecosystem signals</p>
+      <p class="product-label c-pkg">■ Ecosystem analytics</p>
       <ul class="ticks ticks-pkg">
         <li>Package adoption</li>
         <li>Downloads</li>
@@ -509,25 +419,13 @@ Registry: pypi
       </ul>
     </div>
     <div class="caps-col">
-      <p class="product-label c-cli">■ Product usage signals</p>
+      <p class="product-label c-cli">■ CLI usage analytics</p>
       <ul class="ticks ticks-cli">
         <li>CLI usage</li>
-        <li>SDK usage</li>
         <li>Version adoption</li>
         <li>Errors</li>
         <li>Performance</li>
         <li>Human vs. agent</li>
-      </ul>
-    </div>
-    <div class="caps-col">
-      <p class="product-label c-cap">■ Agent signals <span class="tag-planned">Planned</span></p>
-      <ul class="ticks ticks-cap">
-        <li>Capability usage</li>
-        <li>Tool / MCP calls</li>
-        <li>Context</li>
-        <li>Execution</li>
-        <li>Outcomes</li>
-        <li>Latency</li>
       </ul>
     </div>
   </div>
